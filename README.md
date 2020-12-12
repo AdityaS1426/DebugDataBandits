@@ -2,20 +2,8 @@
 
 Group Members - Atharva Kudrimoti, Jacob Rozenkrants, Aditya Surapaneni, Arnav Swami
 
-Project - City Simulation
-
 ## Project Plan
 
-| Brainstorm of Project Ideas | 
-Online Banking System
-Grocery Store Product Inventory
-Hotel Reservation System
-Event Scheduler/Calendar
-E-Commerce Website
-Digital Library
-School Attendance & Grading System
-Storing/Retrieving Medical Records
-Car Dealership
- |
-|-----------------------------| --------- |
-|  Project Summary                     | Hi there this is a test. |
+Below is the link to our Google Document containing our Project Plan. Project Plan was created in Google Document for easy tracking of revision history, easy implementation of tables & bullet points, and ease of collaboration.
+
+[Project Plan Link](https://docs.google.com/document/d/1SD-CuWtx4IgmEOpG97WEE2w6nvn8La3Yk7JviVUhdwo/edit?usp=sharing)
