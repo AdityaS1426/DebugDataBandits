@@ -6,6 +6,6 @@ Project - City Simulation
 
 ## Project Plan
 
-| Brainstorm of Project Ideas | Hi there.
-| ----------------------------|
-| Summary                     | Hi there this is a test.
+| Brainstorm of Project Ideas | School |
+|-----------------------------| --------- |
+|  Project Summary                     | Hi there this is a test. |
