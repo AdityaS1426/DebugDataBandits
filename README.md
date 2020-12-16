@@ -2,6 +2,10 @@
 
 Group Members - Atharva Kudrimoti, Jacob Rozenkrants, Aditya Surapaneni, Arnav Swami
 
+# Summary
+
+The purpose of our project is to utilize Events, Inheritance, & Databases in order to create a “city infrastructure”. This “city infrastructure” will include essential elements that individuals in a city would encounter on a daily basis, such as using a bank’s services, utilizing a calendar/scheduler to plan the day, implementing an attendance/grading system in a school, visiting a car dealership, etc. Our end goal is to have the user of our overall program be able to access these various utilities that entail the city so they can simulate the typical life in a city.
+
 ## Project Plan
 
 Below is the link to our Google Document containing our Project Plan. Project Plan was created in Google Document for easy tracking of revision history, easy implementation of tables & bullet points, and ease of collaboration.
@@ -10,6 +14,4 @@ Below is the link to our Google Document containing our Project Plan. Project Pl
 
 ## Scrum Board
 
-Below is the link to our Google Document containing our Scrum Board. Scrum Board was created in Google Documents for easy editing, easy creation of table, and quick revision.
-
-[Scrum Board Link](https://docs.google.com/document/d/1AMJkpi6zNUKN3baJpD35it6GGk7FQrnGzfGi6xoRwKc/edit?usp=sharing)
+Click on "Projects" to view our Scrum Board.
