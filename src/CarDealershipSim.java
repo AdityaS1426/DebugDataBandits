@@ -18,8 +18,8 @@ public class CarFeatures extends Vehicle implements Comparable<CarFeatures> {
 
 
    // constructor methods for different variables
-    public CarFeatures(String color, int power, int numWheels, int model, int maxRange, boolean AWD, double price) {
-        super(color, power, numWheels);
+    public CarFeatures(String color, int power, int model, int maxRange, boolean AWD, double price) {
+        super(color, power);
         this.model = model;
         this.maxRange = maxRange;
         this.AWD = AWD;
