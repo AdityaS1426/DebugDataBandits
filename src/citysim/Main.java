@@ -1,12 +1,12 @@
 package citysim;
 
+
 import citysim.banking.Bank;
 import citysim.banking.Account;
 
 public class Main {
     public static void main(String[] args){
         System.out.println("Welcome to CitySim!");
-
         testBanking();
     }
 
