@@ -1,28 +1,20 @@
 package citysim;
 
-
-import citysim.banking.Bank;
-import citysim.banking.Account;
+import citysim.tests.banking.BankTests;
 
 public class Main {
     public static void main(String[] args){
         System.out.println("Welcome to CitySim!");
-        testBanking();
+
+
+        // run banking tests
+        runBankingTests();
     }
 
+    public static void runBankingTests() {
 
-    public static void testBanking(){
-        double defaultMaximum = 100;
-
-
-        Bank bank = new Bank();
-
-        Account [] accounts = bank.getAccounts();
-        Account account = bank.createAccount();
-
-        account.deposit(defaultMaximum);
-        double amount = 10;
-        account.withdraw(amount);
-        double balance = account.getBalance();
+        BankTests tests = new BankTests();
+        tests.testWithMenus();
+        // tests.testWithoutMenus();
     }
 }

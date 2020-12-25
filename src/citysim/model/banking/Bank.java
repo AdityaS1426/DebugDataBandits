@@ -1,4 +1,4 @@
-package citysim.banking;
+package citysim.model.banking;
 
 import java.util.ArrayList;
 

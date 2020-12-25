@@ -1,4 +1,4 @@
-package citysim.banking;
+package citysim.model.banking;
 
 public class Account {
     private double amount = 0;
