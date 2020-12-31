@@ -1,11 +1,26 @@
 package citysim.model.banking;
 
+import java.util.*;
+
 public class Account {
     private double amount = 0;
 
+    private String number;
+
+    public Account(String number) {
+        this.number = number;
+    }
+    public Account () {
+
+    }
+
+    public String getNumber() {
+        return this.number;
+    }
+
     public void deposit(double amount) {
         this.amount = this.amount + amount;
-        //will the variable money remain the same as it goes into the next method?
+        //will the variable money remain the same as it goes into the next method?--yes
     }
 
     public void withdraw(double amount) {

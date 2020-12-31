@@ -1,4 +1,5 @@
 package citysim.tests.banking;
+import java.util.*;
 
 // importing views
 import citysim.view.menus.banking.AccountMenu;
@@ -11,6 +12,11 @@ import citysim.model.banking.Bank;
 import citysim.model.banking.Account;
 
 public class BankTests {
+    private Bank bank;
+
+    public BankTests() {
+        this.bank = new Bank();
+    }
 
     public void testWithMenus() {
 
@@ -56,53 +62,79 @@ public class BankTests {
         return done;
     }
 
-    public void displayAccountMenu() {
+    public void displayAccountMenu(Account activeAccount) {
         AccountMenu accountMenu = new AccountMenu();
         AccountMenuOption response = accountMenu.getResponse();
+        //the account is initialized
+
 
         switch (response) {
             case None:
                 // create an account
                 break;
-            case Deposit:
+            case Deposit: runDeposit(activeAccount);
                 // create an account
                 break;
-            case Withdrawal:
+            case Withdrawal: runWithdrawal(activeAccount);
                 // display accounts
                 break;
-            case Balance:
+            case Balance: runDisplayBalance(activeAccount);
                 // select an account
                 break;
         }
     }
 
     public void runCreateAccount() {
-        Bank bank = new Bank();
-        Account account = bank.createAccount();
-
-        // display account number
+        Account userAccount = this.bank.createAccount();
     }
 
     public void runDisplayAccounts() {
-
+        //remember the return type of that method has to match that of which you are assigning it to
+        Account [] accounts = this.bank.getAccounts();
+        for(int i = 0; i < accounts.length; i++) {
+            // Account account = accounts[i];
+            // System.out.println(account.getNumber());
+            System.out.println(accounts[i].getNumber());
+        }
     }
 
     public void runSelectAccount() {
-        displayAccountMenu();
+        // prompt user for account number
+        System.out.println("What account would you like to select? Please enter the account number...");
+        Scanner scan = new Scanner(System.in);
+        String accountNumber = scan.nextLine();
+        Account account = this.bank.findAccount(accountNumber);
+
+        if (account != null) {
+            displayAccountMenu(account);
+        }
+        else {
+            // NOTE: let the user know the account number was not found
+        }
     }
 
-    public void runDeposit() {
+    public void runDeposit(Account activeAccount) {
+        // prompt user for deposit
+        System.out.println("How much money would you like to deposit?");
+        Scanner scan = new Scanner(System.in);
+        double value = scan.nextDouble();
+        activeAccount.deposit(value);
     }
 
-    public void runWithdrawal() {
+    public void runWithdrawal(Account activeAccount) {
+        // prompt user for withdrawal
+        System.out.println("How much money would you like to withdraw?");
+        Scanner scan = new Scanner(System.in);
+        double value = scan.nextDouble();
+        activeAccount.withdraw(value);
     }
 
-    public void runDisplayBalance() {
+    public void runDisplayBalance(Account activeAccount) {
+        System.out.println(activeAccount.getBalance());
     }
 
     public void testBanking(){
         double defaultMaximum = 100;
-
 
         Bank bank = new Bank();
 
