@@ -1,5 +1,5 @@
-import java.util.*;
 //This class is for the AccountingSystem, which contains all elements of an AccountingSystem.
+import java.util.*;
 public class AccountingSystem {
     // Instance Variables
     private SalesTeam team;
