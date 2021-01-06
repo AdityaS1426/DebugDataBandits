@@ -1,124 +1,115 @@
-// This class is for Car, which contains the elements of a car.
-public class Car extends Vehicle implements Comparable<Car> {
-
-    // Instance Variables
-    private int model;
-    private int maxRange;
-    private double safetyRating;
-    private boolean AWD;
-    private double price;
-
-    // Constant Variables for Car Types
-    public static final int SEDAN = 0;
-    public static final int SUV = 1;
-    public static final int SPORTS = 2;
-    public static final int MINIVAN = 3;
-
-    // Constructors
-    public Car(String mfr, String color, int power, int numWheels, int model, int maxRange, double safetyRating, boolean AWD, double price) {
-        super(mfr, color, power, numWheels);
-        this.model = model;
-        this.maxRange = maxRange;
-        this.safetyRating = safetyRating;
-        this.AWD = AWD;
-        this.price = price;
+/**
+ * Vanessa Landayan
+ * Car Dealership Assignment
+ */
+public class Car extends Vehicle implements Comparable<Car>
+{
+    public static enum Model
+    {
+        SEDAN, SUV, SPORTS, MINIVAN;
     }
 
-    // Returns whether or not two cars are of the same type.
-    // Boolean value if model and AWD are the same & both are equal.
-    public boolean equals(Object other) {
-        Car othCar = (Car) other;
-        return super.equals(othCar) && this.model == othCar.model && this.AWD == othCar.AWD && this.safetyRating == othCar.safetyRating;
-    }
+    Model   car_model;
+    int     maxRange;
+    double  safetyRating;
+    boolean AWD;
+    double  cost;
+    boolean electric = false;
 
-     // This method for compares the prices.
-     // The integers are 0, 1, & -1.
-    public int compareTo(Car other) {
-        if (this.price < other.price){
-            return -1;
-        }else if(this.price > other.price){
-            return 1;
+    /**
+     * Constructor initializes the variables
+     * @param manuf
+     * @param color
+     * @param model
+     * @param power
+     * @param safety
+     * @param range
+     * @param awd
+     * @param price
+     */
+    public Car(String manuf, String color, Car.Model model, Vehicle.PowerSource power,
+               double safety, int range, boolean awd, double price)
+    {
+        super(manuf, color, 4, power);
+        car_model = model;
+        cost = price;
+        AWD = awd;
+        safetyRating = safety;
+        maxRange = range;
+        if (power == PowerSource.ELECTRIC_MOTOR)
+        {
+            electric = true;
         }
-        return 0;
     }
 
-    // This displays cars in a formatted manner.
-    // This is a formatted string.
-    public String display() {
-        return String.format("%s %-9s %-5d %-6.2f %-5s $%-10.2f %-15s", super.display(), modelType(this.model), this.maxRange, this.safetyRating, awdDisplay(this.AWD), this.price, super.powerType());
+    /**
+     * Display the information of the car
+     */
+    public String display()
+    {
+        return super.display() + "\t" + car_model + "\t" +"$"+ cost + "\t" + safetyRating + "\t" + maxRange;
+
     }
 
-    // This is a helper method to convert the model value to a string.
-    // This is a string representing the model type.
-    public String modelType(int model){
-        if(model == 0){
-            return "SEDAN";
-        }else if(model == 1){
-            return "SUV";
-        }else if(model == 2){
-            return "SPORTS";
-        }else if(model == 3){
-            return "MINIVAN";
-        }
+    public String toString()
+    {
         return "";
     }
 
-    // This helper method coverts AWD value to a string.
-    public String awdDisplay(boolean awd){
-        if (awd){
-            return "AWD";
-        }else{
-            return "2WD";
-        }
+    /**
+     * Checks if cars are equal to each other
+     */
+    public boolean equals(Object other)
+    {
+        Car otherCar = (Car) other;
+        return super.equals(other) && this.car_model == otherCar.car_model && this.AWD == otherCar.AWD;
     }
 
-    // Returns the model.
-    public int getModel() {
-        return model;
+    /**
+     * Compares cars based on price
+     */
+    public int compareTo(Car other)
+    {
+        if      (this.cost > other.cost) return  1;
+        else if (this.cost < other.cost) return -1;
+        else                               return  0;
     }
 
-    // The model is set here.
-    public void setModel(int model) {
-        this.model = model;
+    /**
+     * The following methods get various variables (see names of the methods)
+     * @return various variables of the car
+     */
+    public double getPrice()
+    {
+        return cost;
     }
 
-    // Returns the variable "maxRange".
-    public int getMaxRange() {
-        return maxRange;
+    public Car.Model getModel()
+    {
+        return car_model;
     }
 
-    // The variable "maxRange" is set.
-    public void setMaxRange(int maxRange) {
-        this.maxRange = maxRange;
-    }
-
-    // Returns the variable "safetyRating".
-    public double getSafetyRating() {
+    public double getSR()
+    {
         return safetyRating;
     }
 
-    // The variable "safetyRating" is set.
-    public void setSafetyRating(double safetyRating) {
-        this.safetyRating = safetyRating;
+    public String getAWD()
+    {
+        if (AWD==true)
+        {
+            return "AWD";
+        }
+        return "2WD";
     }
 
-    // Returns the variable "AWD".
-    public boolean isAWD() {
-        return AWD;
+    public int getRange()
+    {
+        return maxRange;
     }
 
-    // The variable "AWD" is set.
-    public void setAWD(boolean aWD) {
-        AWD = aWD;
-    }
-
-    // Returns the variable "price".
-    public double getPrice() {
-        return price;
-    }
-
-    // The variable "price" is set.
-    public void setPrice(double price) {
-        this.price = price;
+    public boolean getElectric()
+    {
+        return electric;
     }
 }

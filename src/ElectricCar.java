@@ -1,40 +1,47 @@
-// This class contains all the elements of an electric car.
-public class ElectricCar extends Car {
+/**
+ * Vanessa Landayan
+ * Car Dealership Assignment
+ */
+public class ElectricCar extends Car
+{
+    int    rechargeTime;//minutes
+    String batteryType;
 
-    // Instance Variables
-    private int rechargeTime;
-    private String batteryType;
-
-    // Constructor Methods
-    public ElectricCar(String mfr, String color, int power, int numWheels, int model, int maxRange, double safetyRating, boolean AWD, double price, int rechargeTime, String batteryType) {
-        super(mfr, color, power, numWheels, model, maxRange, safetyRating, AWD, price);
-        this.rechargeTime = rechargeTime;
-        this.batteryType = batteryType;
+    /**
+     * Constructor initializes the variables
+     * @param manuf
+     * @param color
+     * @param model
+     * @param power
+     * @param safety
+     * @param range
+     * @param awd
+     * @param price
+     * @param rch
+     */
+    public ElectricCar(String manuf, String color, Model model, Vehicle.PowerSource power,
+                       double safety, int range, boolean awd, double price, int rch)
+    {
+        super(manuf, color, model, Vehicle.PowerSource.ELECTRIC_MOTOR, safety, range, awd, price);
+        rechargeTime = rch;
+        batteryType = "Lithium";
     }
 
-    // Displays cars in a formatted manner.
-    // Displays as a string variable.
-    public String display() {
-        return String.format("%s %-3d %s", super.display(), this.rechargeTime, this.batteryType);
+    public void setRechargeTime(int time)
+    {
+        rechargeTime = time;
     }
 
-    // Returns the variable "batteryType".
-    public String getBatteryType() {
-        return batteryType;
+    public void batteryType(String type)
+    {
+        batteryType = type;
     }
 
-    // The variable "batteryType" is set.
-    public void setBatteryType(String batteryType) {
-        this.batteryType = batteryType;
-    }
-
-   // Returns the variable "rechargeTime".
-    public int getRechargeTime() {
-        return rechargeTime;
-    }
-
-    // The variable "rechargeTime" is set.
-    public void setRechargeTime(int rechargeTime) {
-        this.rechargeTime = rechargeTime;
+    /**
+     * Display the information of the electric car
+     */
+    public String display()
+    {
+        return super.display() + " " + "EL, BAT: " + batteryType + " RCH: " + rechargeTime;
     }
 }

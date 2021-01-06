@@ -1,91 +1,102 @@
-import java.text.SimpleDateFormat;
+/**
+ * Vanessa Landayan
+ * Car Dealership Assignment
+ */
+import java.util.TreeMap;
+import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
-// This class is for Transaction which containes all elements of a Tansaction
+public class Transaction
+{
 
-public class Transaction {
-    // Instance Variables
-    private int transactionid;
-    private GregorianCalendar date;
-    private String salesPerson;
-    private Car car;
-    private String type;
-    private double price;
+    static int transactionID;
+    static GregorianCalendar date;
+    static Car car;
+    static String salesPerson;
+    static double price;
+    public Map<String, Object> infoMap;
+
+    public enum TransactionType
+    {
+        BUY, RETURN;
+    }
+    public static TransactionType type;
+
+    /**
+     * When a transaction object is made, a map for that transaction is created, where given values are put
+     * @param transactionID2
+     * @param date2
+     * @param car2
+     * @param salesPerson2
+     * @param type2
+     * @param price2
+     */
+    public Transaction(int transactionID2, GregorianCalendar date2, Car car2, String salesPerson2, TransactionType type2, double price2)
+    {
+        transactionID = transactionID2;
+        date = date2;
+        car = car2;
+        salesPerson = salesPerson2;
+        type = type2;
+        price = price2;
 
 
-    // Constructor Method
-    public Transaction(int transactionid, GregorianCalendar date, Car car, String salesPerson, String type, double price){
-        this.transactionid = transactionid;
-        this.date = date;
-        this.car = car;
-        this.salesPerson = salesPerson;
-        this.type = type;
-        this.price = price;
+        infoMap = new TreeMap<String, Object>();
+        infoMap.put("ID", transactionID);
+        infoMap.put("Date", date);
+        infoMap.put("Car", car);
+        infoMap.put("SP", salesPerson);
+        infoMap.put("Type", type);
+        infoMap.put("Price", price);
+
     }
 
-    // A String of formatted text for the transaction to be displayed.
-    public String display() {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM dd, yyyy");
-        return "Date: "+ sdf.format(date.getTime()) + "     Sales Person: " + salesPerson + "\nTransaction ID: " + transactionid + "          Sale Type: " + type + "\nItem:\n------------------------------------------------\nCar VIN: " +car.getVIN() + "                          $" + String.format("%.2f",price) + "\n------------------------------------------------";
+    /**
+     * Displays transaction information
+     * @return a string of the information
+     */
+    public String display()
+    {
+        String formatdate = date.toZonedDateTime().format(DateTimeFormatter.ofPattern("d MMM uuuu"));
+        return
+                "------------------------------\n"
+                        + "[Transaction]\t[ID: " + transactionID + "]\n"
+                        + "\nDate:\t\t" + formatdate
+                        + "\nType:\t\t" + type
+                        + "\nSalesPerson:\t" + salesPerson
+                        + "\nVIN:\t\t" + car.getVIN()
+                        + "\nModel:\t\t" + car.getModel()
+                        + "\nPrice:\t\t$" + price
+                ;
+
     }
 
-    // Returns the transaction ID.
-    public int getTransactionid() {
-        return transactionid;
+    /**
+     * The following methods get the variable values from the map
+     * @return various values (see name of each method)
+     */
+    public GregorianCalendar getDate()
+    {
+        return (GregorianCalendar) infoMap.get("Date");
     }
 
-    // The transaction ID to be set.
-    public void setTransactionid(int transactionid) {
-        this.transactionid = transactionid;
+    public Car getCar()
+    {
+        return (Car) infoMap.get("Car");
     }
 
-    // Return the data.
-    public GregorianCalendar getDate() {
-        return date;
+    public double getPrice()
+    {
+        return (double) infoMap.get("Price");
+    }
+    public Transaction.TransactionType getType()
+    {
+        return (TransactionType) infoMap.get("Type");
+    }
+    public String getSalesPerson()
+    {
+        return (String) infoMap.get("SP");
     }
 
-    // The date to be set.
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
-    }
-
-    // Return the sales person.
-    public String getSalesPerson() {
-        return salesPerson;
-    }
-
-    // The sales person to be set.
-    public void setSalesPerson(String salesPerson) {
-        this.salesPerson = salesPerson;
-    }
-
-    // The car to be set.
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    // Returns the type.
-    public String getType() {
-        return type;
-    }
-
-    // The type to be set.
-    public void setType(String type) {
-        this.type = type;
-    }
-
-   // Return the price.
-    public double getPrice() {
-        return price;
-    }
-
-    // The price to be set.
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    // Return the car.
-    public Car getCar() {
-        return car;
-    }
 }

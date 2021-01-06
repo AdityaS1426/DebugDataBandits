@@ -1,82 +1,86 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
+/**
+ * Vanessa Landayan
+ * Car Dealership Assignment
+ */
 import java.util.ListIterator;
+import java.util.LinkedList;
 
+public class SalesTeam
+{
+    static LinkedList<String> team;
 
+    /**
+     * Constructor initializes the LinkedList and adds the names of team members
+     */
+    public SalesTeam()
+    {
+        team = new LinkedList<String>();
+        team.add("Kingly");
+        team.add("Danny");
+        team.add("Ken");
+        team.add("Vanessa");
+        team.add("Jimmy");
+        team.add("Anthony");
+        team.add("Alex");
 
-// This class is for SalesTeam which containes all elements of a SalesTeam
-public class SalesTeam {
-
-    // Instance Variables
-    private LinkedList<String> salesPeople;
-    private ListIterator<String> iterator;
-    private ArrayList<Integer> numSales = new ArrayList<Integer>();
-
-    // Constructor Methods
-    public SalesTeam(){
-        salesPeople = new LinkedList<String>();
-        salesPeople.addLast("Joe");
-        salesPeople.addLast("Mary");
-        salesPeople.addLast("James");
-        salesPeople.addLast("Tim");
-        salesPeople.addLast("Ben");
-        salesPeople.addLast("Alice");
     }
 
-    // Gets a random sales person from the list of sales people.
-    // Return sales person.
-    public String getSalesPerson(){
-        int ranPerson = (int)(Math.random()*(salesPeople.size()));
-        iterator = salesPeople.listIterator(ranPerson);
-        String person =  iterator.next();
-        return person;
-    }
-
-    // Gets all the sales people as a String.
-    // Return SalesPeopleString.
-    public String getAllSalesPeople(){
-        iterator = salesPeople.listIterator();
-        String salesPeopleString = "";
-        for (int i = 0; i < salesPeople.size(); i++){
-            salesPeopleString += "\n" + (i+1) + ". " + iterator.next();
+    /**
+     * Counts the number of team members
+     * @return amount of members
+     */
+    public int countTeam()
+    {
+        ListIterator<String> iter = team.listIterator();
+        int counter = 0;
+        while(iter.hasNext())
+        {
+            counter++;
+            iter.next();
         }
-        return salesPeopleString;
+        return counter;
     }
 
-    // Finds sales person based on the index.
-    public String findSalesPerson(int index){
-        iterator = salesPeople.listIterator(index);
-        String person = iterator.next();
-        return person;
+    /**
+     * Gets a random team member
+     * @return random team member
+     */
+    public String getRandom()
+    {
+        ListIterator<String> iter = team.listIterator();
+        int index =  (int)(Math.random() * team.size());
+        iter = team.listIterator(index);
+        String name = iter.next();
+        return name;
     }
 
-    // Return the sales people.
-    public LinkedList<String> getSalesPeople() {
-        return salesPeople;
+    /**
+     * Displays the names of all the members
+     */
+    public void displayTeam()
+    {
+        ListIterator<String> iter = team.listIterator();
+        System.out.println("----------[SALES TEAM]----------\n");
+        while(iter.hasNext())
+        {
+            String name = iter.next();
+            System.out.println(name);
+        }
     }
 
-    // The sales people to be set.
-    public void setSalesPeople(LinkedList<String> salesPeople) {
-        this.salesPeople = salesPeople;
-    }
-
-    // Returns the iterator.
-    public ListIterator<String> getIterator() {
-        return iterator;
-    }
-
-    // The iterator is to be set.
-    public void setIterator(ListIterator<String> iterator) {
-        this.iterator = iterator;
-    }
-
-    // Return numSales.
-    public ArrayList<Integer> getNumSales() {
-        return numSales;
-    }
-
-    // numSales to be set.
-    public void setNumSales(ArrayList<Integer> numSales) {
-        this.numSales = numSales;
+    /**
+     * Gets a certain team member based on their index
+     * @param index
+     * @return name of the member
+     */
+    public String getASalesPerson(int index)
+    {
+        ListIterator<String> iter = team.listIterator();
+        String name = null;
+        for (int i = 0; i <= index; i++)
+        {
+            name = iter.next();
+        }
+        return name;
     }
 }
