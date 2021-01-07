@@ -11,7 +11,7 @@ public class GradingSystemRough
 		
         
         for(i=0; i<4; i++) { 
-           System.out.print("Enter Marks of Test"+(i+1)+":");
+           System.out.print("Enter Score of Test"+(i+1)+":");
            marks[i] = scanner.nextInt();
            total = total + marks[i];
         }
