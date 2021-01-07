@@ -1,23 +1,10 @@
-/**
- * Vanessa Landayan
- * Car Dealership Assignment
- */
 public class ElectricCar extends Car
 {
     int    rechargeTime;//minutes
     String batteryType;
 
     /**
-     * Constructor initializes the variables
-     * @param manuf
-     * @param color
-     * @param model
-     * @param power
-     * @param safety
-     * @param range
-     * @param awd
-     * @param price
-     * @param rch
+     * Constructor initializes the variables.
      */
     public ElectricCar(String manuf, String color, Model model, Vehicle.PowerSource power,
                        double safety, int range, boolean awd, double price, int rch)
@@ -38,7 +25,7 @@ public class ElectricCar extends Car
     }
 
     /**
-     * Display the information of the electric car
+     * Displays the information of the electric car.
      */
     public String display()
     {

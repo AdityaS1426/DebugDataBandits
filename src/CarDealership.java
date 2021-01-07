@@ -1,7 +1,3 @@
-/**
- * Vanessa Landayan
- * Car Dealership Assignment
- */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,14 +5,13 @@ import java.util.Iterator;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 
-
 public class CarDealership
 {
     ArrayList<Car> cars;
     SalesTeam salesTeam;
     AccountingSystem accountingSystem;
 
-    // Filters
+    // These are filters to sort the cars.
     boolean electricFilter = false;
     boolean priceFilter = false;
     double  priceMin    = 0;
@@ -24,7 +19,7 @@ public class CarDealership
     boolean AWDFilter = false;
 
     /**
-     * Constructor initializes variables
+     * Constructor initializes the variables.
      */
     public CarDealership()
     {
@@ -34,8 +29,7 @@ public class CarDealership
     }
 
     /**
-     * Adds cars to the ArrayList
-     * @param newCars
+     * Adds cars to the ArrayList.
      */
     public void addCars(ArrayList<Car> newCars)
     {
@@ -44,10 +38,8 @@ public class CarDealership
     }
 
     /**
-     * Buys the car with the corresponding VIN
-     * Removes it from the cars
-     * @param VIN
-     * @return the car bought
+     * Buys the car with the corresponding VIN number.
+     * Removes it from the cars list.
      */
     public String buyCar(int VIN)
     {
@@ -72,10 +64,8 @@ public class CarDealership
     }
 
     /**
-     * Returns the car with the corresponding transaction ID
-     * Adds it back to the cars
-     * @param id
-     * @return the car returned
+     * Returns the car with the corresponding transaction ID.
+     * Adds it back to the cars list.
      */
     public String returnCar(int id)
     {
@@ -92,7 +82,7 @@ public class CarDealership
     }
 
     /**
-     * Displays all the cars available
+     * Displays all the cars available.
      */
     public void displayInventory()
     {
@@ -108,7 +98,7 @@ public class CarDealership
     }
 
     /**
-     * Clear all the filters
+     * Clears all the filters.
      */
     public void filtersClear()
     {
@@ -118,9 +108,7 @@ public class CarDealership
     }
 
     /**
-     * Filter by price
-     * @param min
-     * @param max
+     * Filters by price.
      */
     public void filterByPrice(double min, double max)
     {
@@ -139,7 +127,7 @@ public class CarDealership
     }
 
     /**
-     * Filter by electric
+     * Filters by electric type.
      */
     public void filterByElectric()
     {
@@ -155,7 +143,7 @@ public class CarDealership
 
     }
     /**
-     * Filter by AWD
+     * Filter by drivetrain.
      */
     public void filterByAWD()
     {
@@ -163,7 +151,7 @@ public class CarDealership
     }
 
     /**
-     * Sorts the cars by price
+     * Sorts the cars by their prices.
      */
     public void sortByPrice()
     {
@@ -171,7 +159,7 @@ public class CarDealership
     }
 
     /**
-     * Sorts the cars by safetyRating
+     * Sorts the cars by their safety rating.
      */
     private class SafetyRatingComparator implements Comparator<Car>
     {
@@ -189,7 +177,7 @@ public class CarDealership
     }
 
     /**
-     * Sorts the cars by maxRange
+     * Sorts the cars by their max range.
      */
     private class RangeComparator implements Comparator<Car>
     {

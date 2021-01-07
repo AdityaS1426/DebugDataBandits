@@ -21,3 +21,47 @@ Below is the link to our Google Document containing our Project Plan. Project Pl
 ## Scrum Board
 
 Click on "Projects" to view our Scrum Board.
+
+## Commands for Car Dealership
+
+NOTE: Type "ADD" first so that the cars can be added to the inventory.
+
+###### Basic Use
+
+ADD - Add cars from the file to the program.
+
+L - List the cars.
+
+SALES - List the yearly sales.
+
+TEAM - List the sales team.
+
+TOPSP - List the top sales person.
+
+STATS - List the sales statistics.
+
+Q - Quit the program.
+
+###### Sorting
+
+SPR - Sort by the price.
+
+SSR - Sort by the safety rating.
+
+SMR - Sort by the maximum range.
+
+###### Filtering
+
+FPR - Filter by the price.
+
+FEL - Filter the electric vehicles.
+
+FAW - Filter by drivetrain.
+
+FCL - Clear the filters.
+
+###### Transactions
+
+BUY - Buy a car.
+
+RET - Return a car.

@@ -1,7 +1,3 @@
-/**
- * Vanessa Landayan
- * Car Dealership Assignment
- */
 import java.lang.Math;
 public class Vehicle
 {
@@ -14,10 +10,10 @@ public class Vehicle
     String manuf;
     String color;
     int    numWheels;
-    int VIN; //vehicle identification number
+    int VIN; // Vehicle Identification Number
 
     /**
-     * Constructor initializes variables (VIN is a random generated number)
+     * Constructor initializes the variables. The VIN is randomly generated.
      */
     public Vehicle()
     {
@@ -35,8 +31,7 @@ public class Vehicle
     }
 
     /**
-     * Display vehicle information
-     * @return the string of information
+     * Displays the vehicle information.
      */
     public String display()
     {
@@ -48,7 +43,7 @@ public class Vehicle
     }
 
     /**
-     * Checks if vehicles are equal to each other
+     * Checks if vehicles are equal to each other.
      */
     public boolean equals(Object other)
     {

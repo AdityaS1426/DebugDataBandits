@@ -1,7 +1,3 @@
-/**
- * Vanessa Landayan
- * Car Dealership Assignment
- */
 import java.util.ListIterator;
 import java.util.LinkedList;
 
@@ -10,24 +6,23 @@ public class SalesTeam
     static LinkedList<String> team;
 
     /**
-     * Constructor initializes the LinkedList and adds the names of team members
+     * Constructor initializes the LinkedList and adds the names of the sales team members.
      */
     public SalesTeam()
     {
         team = new LinkedList<String>();
-        team.add("Kingly");
-        team.add("Danny");
-        team.add("Ken");
-        team.add("Vanessa");
-        team.add("Jimmy");
-        team.add("Anthony");
-        team.add("Alex");
+        team.add("Matthew");
+        team.add("Jeffrey");
+        team.add("James");
+        team.add("Brian");
+        team.add("Hailey");
+        team.add("Amanda");
+        team.add("Samantha");
 
     }
 
     /**
-     * Counts the number of team members
-     * @return amount of members
+     * Counts the number of team members.
      */
     public int countTeam()
     {
@@ -42,8 +37,7 @@ public class SalesTeam
     }
 
     /**
-     * Gets a random team member
-     * @return random team member
+     * Gets a random team member.
      */
     public String getRandom()
     {
@@ -55,7 +49,7 @@ public class SalesTeam
     }
 
     /**
-     * Displays the names of all the members
+     * Displays the names of all the team members.
      */
     public void displayTeam()
     {
@@ -69,9 +63,7 @@ public class SalesTeam
     }
 
     /**
-     * Gets a certain team member based on their index
-     * @param index
-     * @return name of the member
+     * Gets a certain team member based on their index.
      */
     public String getASalesPerson(int index)
     {

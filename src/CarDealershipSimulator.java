@@ -1,7 +1,3 @@
-/**
- * Vanessa Landayan
- * Car Dealership Assignment
- */
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -25,8 +21,8 @@ public class CarDealershipSimulator
         System.out.print(">");
 
         /**
-         * Scans user input and follows the commands
-         * If input does not match an expected command, it will either show a message or just do nothing and continue
+         * Scans user input and follows the commands of the user.
+         * If  the user input does not match an expected command, it will either show a message or just do nothing and continue.
          */
         while (scanner.hasNextLine())
         {
@@ -189,7 +185,7 @@ public class CarDealershipSimulator
                             }
                         } catch (NumberFormatException ex)
                         {
-                            System.out.println("Invalid input. Try again.");
+                            System.out.println("Invalid input. Please try again.");
                             continue;
                         }
                     }
@@ -204,11 +200,9 @@ public class CarDealershipSimulator
     }
 
     /**
-     * Reads from the written text file, assigns values to variables, and creates car objects accordingly
-     * Puts the car objects inside an ArrayList
-     * Displays message if there is no text file
-     * @param Cars
-     * @return an ArrayList of car objects
+     * Reads from the written text file, assigns values to the variables, and creates car objects accordingly.
+     * Puts the car objects inside an ArrayList.
+     * Displays a message if there is no text file or if it can't find the text file.
      */
     public static ArrayList<Car> readFiles(File Cars)
     {

@@ -1,7 +1,3 @@
-/**
- * Vanessa Landayan
- * Car Dealership Assignment
- */
 import java.util.TreeMap;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
@@ -24,13 +20,7 @@ public class Transaction
     public static TransactionType type;
 
     /**
-     * When a transaction object is made, a map for that transaction is created, where given values are put
-     * @param transactionID2
-     * @param date2
-     * @param car2
-     * @param salesPerson2
-     * @param type2
-     * @param price2
+     * When a transaction object is made, a map for that transaction is created, where the given values are stored.
      */
     public Transaction(int transactionID2, GregorianCalendar date2, Car car2, String salesPerson2, TransactionType type2, double price2)
     {
@@ -53,8 +43,7 @@ public class Transaction
     }
 
     /**
-     * Displays transaction information
-     * @return a string of the information
+     * Displays the transaction information.
      */
     public String display()
     {
@@ -73,8 +62,7 @@ public class Transaction
     }
 
     /**
-     * The following methods get the variable values from the map
-     * @return various values (see name of each method)
+     * The following methods get the variable values from the map.
      */
     public GregorianCalendar getDate()
     {

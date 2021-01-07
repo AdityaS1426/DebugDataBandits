@@ -1,7 +1,3 @@
-/**
- * Vanessa Landayan
- * Car Dealership Assignment
- */
 public class Car extends Vehicle implements Comparable<Car>
 {
     public static enum Model
@@ -17,15 +13,7 @@ public class Car extends Vehicle implements Comparable<Car>
     boolean electric = false;
 
     /**
-     * Constructor initializes the variables
-     * @param manuf
-     * @param color
-     * @param model
-     * @param power
-     * @param safety
-     * @param range
-     * @param awd
-     * @param price
+     * The constructor initializes the variables.
      */
     public Car(String manuf, String color, Car.Model model, Vehicle.PowerSource power,
                double safety, int range, boolean awd, double price)
@@ -43,7 +31,7 @@ public class Car extends Vehicle implements Comparable<Car>
     }
 
     /**
-     * Display the information of the car
+     * This displays the information of the car.
      */
     public String display()
     {
@@ -57,7 +45,7 @@ public class Car extends Vehicle implements Comparable<Car>
     }
 
     /**
-     * Checks if cars are equal to each other
+     * Checks if the cars are equal to each other.
      */
     public boolean equals(Object other)
     {
@@ -66,7 +54,7 @@ public class Car extends Vehicle implements Comparable<Car>
     }
 
     /**
-     * Compares cars based on price
+     * Compares cars based on their prices.
      */
     public int compareTo(Car other)
     {
@@ -76,8 +64,8 @@ public class Car extends Vehicle implements Comparable<Car>
     }
 
     /**
-     * The following methods get various variables (see names of the methods)
-     * @return various variables of the car
+     * The following methods get various variables.
+     * Returns various variables of the car.
      */
     public double getPrice()
     {

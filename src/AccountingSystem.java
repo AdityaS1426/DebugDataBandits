@@ -1,7 +1,3 @@
-/**
- * Vanessa Landayan
- * Car Dealership Assignment
- */
 import java.util.TreeMap;
 import java.util.Map;
 import java.util.Set;
@@ -21,8 +17,8 @@ public class AccountingSystem
     private static int totalReturned;
 
     /**
-     * Constructor initializes the maps for transactions with ID, amount of sales per month, amount of sales per salesperson;
-     and initializes variables
+     * The constructor initializes the maps for transactions with ID, the amount of sales per month, the amount of sales per salesperson,
+     and initializes variables.
      */
     public AccountingSystem()
     {
@@ -43,13 +39,13 @@ public class AccountingSystem
         monthSalesMap.put(10, 0);
         monthSalesMap.put(11, 0);
 
-        personSalesMap.put("Kingly", 0);
-        personSalesMap.put("Danny", 0);
-        personSalesMap.put("Ken", 0);
-        personSalesMap.put("Vanessa", 0);
-        personSalesMap.put("Jimmy", 0);
-        personSalesMap.put("Anthony", 0);
-        personSalesMap.put("Alex", 0);
+        personSalesMap.put("Matthew", 0);
+        personSalesMap.put("Jeffrey", 0);
+        personSalesMap.put("James", 0);
+        personSalesMap.put("Brian", 0);
+        personSalesMap.put("Hailey", 0);
+        personSalesMap.put("Amanda", 0);
+        personSalesMap.put("Samantha", 0);
 
         totalSales = 0;
         totalSold = 0;
@@ -57,13 +53,7 @@ public class AccountingSystem
     }
 
     /**
-     * Adds a new transaction to the map, updates variables, and updates maps
-     * @param date
-     * @param car
-     * @param salesPerson
-     * @param type
-     * @param salePrice
-     * @return a display of the transaction
+     * Adds a new transaction to the map, updates variables, and updates maps.
      */
     public String add(GregorianCalendar date, Car car, String salesPerson,
                       Transaction.TransactionType type, double salePrice)
@@ -95,9 +85,7 @@ public class AccountingSystem
     }
 
     /**
-     * Gets a certain transaction
-     * @param id
-     * @return transaction with corresponding ID
+     * Gets a certain transaction, and returns a transaction with the corresponding ID.
      */
     public static Transaction getTransaction(int id)
     {
@@ -110,7 +98,7 @@ public class AccountingSystem
     }
 
     /**
-     * Displays all the transactions by looping through and displaying the map of transactionIDs and transaction objects
+     * Displays all the transactions by looping through and displaying the map of transactionIDs and transaction objects.
      */
     public void getAllTransactions()
     {
@@ -129,9 +117,7 @@ public class AccountingSystem
     }
 
     /**
-     * Gets a certain car
-     * @param id
-     * @return the car
+     * Gets a certain car. Returns the car.
      */
     public Car getCar(int id)
     {
@@ -147,7 +133,7 @@ public class AccountingSystem
     }
 
     /**
-     * Displays the salesperson(s) with the highest amount of sales
+     * Displays the salesperson(s) with the highest amount of sales.
      */
     public void topSalesPerson()
     {
@@ -172,8 +158,8 @@ public class AccountingSystem
     }
 
     /**
-     * Displays the total sales, total sold, average sales, total returned, month with the most
-     * sales and the amount of cars sold in the best month
+     * Displays the total sales, total number of cars sold, average sales, total returned, month with the most
+     * sales, and the amount of cars sold in the most successful month.
      */
     public void stats()
     {
@@ -206,8 +192,7 @@ public class AccountingSystem
     }
 
     /**
-     * Displays the transactions within the indicated month
-     * @param month
+     * Displays the transactions within the indicated month.
      */
     public void salesM(int month)
     {
