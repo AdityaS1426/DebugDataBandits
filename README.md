@@ -120,4 +120,4 @@ Press 2 - Withdraw (Can only be done if there's money in the account.)
 
 Press 3 - Get Balance
 
-## To find Atharva's Code, go to gradingattendancesystem branch.
+## To find Atharva's Code and instructions, go to gradingsystemandattendance branch.
