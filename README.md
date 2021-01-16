@@ -33,6 +33,7 @@ Click on "Projects" to view our Scrum Board.
 - Click on the first green arrow to the left of the code.
 - Click "Run".
 - IMPORTANT: Make sure to type "ADD" in order to add the cars from the TXT file to the program. If this is not done, the other commands won't work.
+- ALSO IMPORTANT: When sorting or filtering a car, enter the command, & then press "L" to load the car list again. This list will display the appropriate sort or filter.
 - The other commands are listed in the README.
 ## Commands for Car Dealership
 
