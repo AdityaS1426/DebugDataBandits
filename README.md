@@ -120,4 +120,19 @@ Press 2 - Withdraw (Can only be done if there's money in the account.)
 
 Press 3 - Get Balance
 
-## To find Atharva's Code and instructions, go to gradingsystemandattendance branch.
+## How to Run GradingSystem & AttendanceSystem
+
+THIS PROGRAM IS NOT IN THE MAIN BRANCH, IT'S IN AN ALTERNATE BRANCH. PROGRAM WILL BE MOVED TO MAIN BRANCH WHEN FINAL TOUCHES ARE MADE.
+
+These programs are primarily based on user input.
+
+###### Grading System 
+
+- Enter in the student's test scores for all 4 tests.
+- The program will compute the average.
+- This will be printed on the screen.
+
+###### Attendance System
+- If the student attended the class, enter "1".
+- If the student was absent, enter "0". 
+- The total number for five days will result in different outputs. (Ex. You have 1 or more absences.)
