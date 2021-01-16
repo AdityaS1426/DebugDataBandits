@@ -1,5 +1,3 @@
-//HASSAAN ABBASI
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -9,7 +7,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- Works with Transaction objects to simulate an accounting system
+ Works with Transaction objects to simulate an accounting system.
  */
 public class AccountingSystem
 {
@@ -26,12 +24,12 @@ public class AccountingSystem
     }
 
     /**
-     Adds transaction to hash map
-     @param date Date of transaction
-     @param car Car being bought or returned
-     @param salesPerson Name of the sales person
-     @param type Type of transaction (BUY or RETURN)
-     @param salePrice Price the car was sold for
+     Adds transaction to hash map.
+     @param date Date of transaction.
+     @param car Car being bought or returned.
+     @param salesPerson Name of the sales person.
+     @param type Type of transaction. (BUY or RETURN)
+     @param salePrice Price the car was sold for.
      */
     public String add(Calendar date, Car car, String salesPerson, String type, double salePrice)
     {
@@ -42,8 +40,8 @@ public class AccountingSystem
     }
 
     /**
-     Finds a transaction based on transaction ID
-     @param id The ID of the car to retrieve
+     Finds a transaction based on transaction ID.
+     @param id The ID of the car to retrieve.
      */
     public Transaction getTransaction(int id)
     {
@@ -66,24 +64,24 @@ public class AccountingSystem
     }
 
     /**
-     Returns the top sales person
+     Returns the top sales person.
      */
     public String topSalesPerson()
     {
         SalesTeam teamObj = new SalesTeam();
         Map<String, Integer> salesPeopleSells = new TreeMap<String,Integer>();
         Set<String> keys = salesPeopleSells.keySet();
-        String topSP =""; //Top sales person
-        String topSPTie = ""; //Top sales person string for tied sales
-        int top = 0; //Number for top sales
+        String topSP =""; //Top sales person.
+        String topSPTie = ""; //Top sales person String for tied sales.
+        int top = 0; //Number for top sales.
 
-        //Mapping the sales team members to initial sales of 0
+        //Mapping the sales team members to initial sales of 0.
         for(int i = 0; i < teamObj.salesTeamSize(); i++)
         {
             salesPeopleSells.put(teamObj.returnIPerson(i), 0);
         }
 
-        //Updating the sales for every team member based on BUY and RETURN
+        //Updating the sales for every team member based on BUY and RETURN.
         for(Integer trID : transactions.keySet())
         {
             if(transactions.get(trID).getType().equals("BUY"))
@@ -101,7 +99,7 @@ public class AccountingSystem
             }
         }
 
-        //Finding the top sales person
+        //Finding the top sales person.
         for(String key : keys)
         {
             if(salesPeopleSells.get(key) > top)
@@ -112,7 +110,7 @@ public class AccountingSystem
 
         }
 
-        //Finding another top sales person if there's a tie
+        //Finding another top sales person if there's a tie.
         for(String key : keys)
         {
             if(salesPeopleSells.get(key) == top && !key.equals(topSP))
@@ -128,7 +126,7 @@ public class AccountingSystem
 
     /**
      Returns the transactions that occurred in a given month.
-     @param i The month number
+     @param i The month number.
      */
     public void getTransactionListM(int i)
     {
@@ -143,16 +141,16 @@ public class AccountingSystem
      */
     public void getStats()
     {
-        int totalSales = 0; //Total number of sales
-        int averageSales = 0; //Average sales
-        int carsSold = 0; //Number of cars sold
-        int highestSalesMNum = 0; //Highest sales month in number format
-        int mostSales = 0; //The highest number of sales
-        String highestSalesM = ""; //Highest sales month in string format
-        String highestSalesMTie = ""; //Highest sales month string in case there's a tie
-        int carsRet = 0; //Number of cars returned
+        int totalSales = 0; //Total number of sales.
+        int averageSales = 0; //Average sales.
+        int carsSold = 0; //Number of cars sold.
+        int highestSalesMNum = 0; //Highest sales month in number format.
+        int mostSales = 0; //The highest number of sales.
+        String highestSalesM = ""; //Highest sales month in String format.
+        String highestSalesMTie = ""; //Highest sales month string in case there's a tie.
+        int carsRet = 0; //Number of cars returned.
 
-        //Total sales function
+        //Total sales function.
         for (Integer trID : transactions.keySet())
         {
             if(transactions.get(trID).getType().equals("BUY"))
@@ -165,10 +163,10 @@ public class AccountingSystem
             }
         }
 
-        //Average sales function
+        //Average sales function.
         averageSales = totalSales / 12;
 
-        //Cars sold/returned function
+        //Cars sold/returned function.
         for (Integer trID : transactions.keySet())
         {
             if(transactions.get(trID).getType().equals("BUY"))
@@ -182,8 +180,8 @@ public class AccountingSystem
             }
         }
 
-        //Highest sales month function
-        Map<Integer, Integer> highestM = new TreeMap<Integer,Integer>(); //Mapping month number to sales
+        //Highest sales month function.
+        Map<Integer, Integer> highestM = new TreeMap<Integer,Integer>(); //Mapping month number to sales.
         Set<Integer> keys = highestM.keySet();
         //SimpleDateFormat sdf = new SimpleDateFormat("MMM");
 
@@ -269,7 +267,7 @@ public class AccountingSystem
             case 0:
                 if(totalSales == 0)
                 {
-                    highestSalesM = "No highest sales month";
+                    highestSalesM = "No highest sales month.";
                     break;
                 }
                 highestSalesM = "Jan";

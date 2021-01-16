@@ -1,5 +1,3 @@
-//HASSAAN ABBASI
-
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
@@ -17,13 +15,13 @@ public class Transaction
     private double salePrice;
 
     /**
-     Constructor for the Transaction class
-     @param id ID of the transaction
-     @param date Date of transaction
-     @param car Car being bought or returned
-     @param salesPerson Name of the sales person
-     @param type Type of transaction (BUY or RETURN)
-     @param salePrice Price the car was sold for
+     Constructor for the Transaction class.
+     @param id ID of the transaction.
+     @param date Date of transaction.
+     @param car Car being bought or returned.
+     @param salesPerson Name of the sales person.
+     @param type Type of transaction. (BUY or RETURN)
+     @param salePrice Price the car was sold for.
      */
     public Transaction(int id, GregorianCalendar date, Car car, String salesPerson, String type, double salePrice)
     {
@@ -36,7 +34,7 @@ public class Transaction
     }
 
     /**
-     Returns a string describing the transaction
+     Returns a string describing the transaction.
      */
     public String display()
     {
@@ -53,7 +51,7 @@ public class Transaction
     }
 
     /**
-     Get the ID
+     Get the ID.
      */
     public int getId()
     {
@@ -61,7 +59,7 @@ public class Transaction
     }
 
     /**
-     Get the car
+     Get the car.
      */
     public Car getCar()
     {
@@ -69,7 +67,7 @@ public class Transaction
     }
 
     /**
-     Get the sales person
+     Get the sales person.
      */
     public String getSalesPerson()
     {
@@ -77,7 +75,7 @@ public class Transaction
     }
 
     /**
-     Get the sale price
+     Get the sale price.
      */
     public Double getSalePrice()
     {
@@ -85,7 +83,7 @@ public class Transaction
     }
 
     /**
-     Get the type of transaction
+     Get the type of transaction.
      */
     public String getType() {
         return type;

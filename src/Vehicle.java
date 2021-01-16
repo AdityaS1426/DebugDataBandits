@@ -1,18 +1,16 @@
-//HASSAAN ABBASI
-
 /**
- Vehicle -- This will be our basic blueprint for a vehicle object. From
- this, we shall form more detailed vehicles such as electric cars.
+ Vehicle -- This will be the basic blueprint for a vehicle object. From
+ this, we will form more detailed vehicles such as electric cars.
  */
 public class Vehicle
 {
-    //Enum for power source
+    //ENum for power source.
     public static enum powerSource
     {
         ELECTRIC_MOTOR, GAS_ENGINE;
     }
 
-    //Instance variables
+    //Instance Variables
     public powerSource power;
     private String mfr;
     private String color;
@@ -34,7 +32,7 @@ public class Vehicle
     }
 
     /**
-     Return the manufacturer of the vehicle.
+     Returns the manufacturer of the vehicle.
      */
     public String getMfr()
     {
@@ -85,7 +83,7 @@ public class Vehicle
     }
 
     /**
-     Get the VIN
+     Get the VIN.
      */
     public int getVIN()
     {
@@ -103,7 +101,7 @@ public class Vehicle
     }
 
     /**
-     Returns a string containing the manufacturer name and color.
+     Returns a string containing the manufacturer name & color.
      */
     public String display()
     {

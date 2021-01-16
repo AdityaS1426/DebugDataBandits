@@ -1,17 +1,15 @@
-//HASSAAN ABBASI
-
 /**
  Car -- This will be a type of vehicle.
  */
 public class Car extends Vehicle implements Comparable<Car>
 {
-    //Enum for model
+    //ENum for model.
     public static enum Model
     {
         SEDAN, SUV, SPORTS, MINIVAN;
     }
 
-    //Instance variables
+    //Instance Variables
     public Model model;
     private int maxRange;
     private double safetyRating;
@@ -25,7 +23,7 @@ public class Car extends Vehicle implements Comparable<Car>
      @param color The color of the vehicle.
      @param power The power of the vehicle.
      @param model The model of the car.
-     @param maxRange Mileage of the car
+     @param maxRange Mileage of the car.
      @param safetyRating The safety rating of the car.
      @param AWD The All-Wheel-Drive status of the car.
      @param price The cost to buy the car.
@@ -42,7 +40,7 @@ public class Car extends Vehicle implements Comparable<Car>
     }
 
     /**
-     Returns a string describing the car.
+     Returns a String describing the car.
      */
     public String display()
     {
@@ -51,7 +49,7 @@ public class Car extends Vehicle implements Comparable<Car>
     }
 
     /**
-     Return the max range the car has.
+     Returns the max range the car has.
      */
     public int getMaxRange()
     {

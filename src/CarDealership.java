@@ -1,5 +1,3 @@
-//HASSAAN ABBASI
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,14 +11,14 @@ import java.util.InputMismatchException;
  */
 public class CarDealership
 {
-    //Objects for use
+    //Objects for Use
     SalesTeam sTeam = new SalesTeam();
     AccountingSystem aSys = new AccountingSystem();
 
-    //Instance variable
+    //Instance Variable
     private ArrayList<Car> cars;
 
-    //Filter variables
+    //Filter Variables
     public boolean ele = false;
     public boolean AWD = false;
     public boolean price = false;
@@ -33,8 +31,8 @@ public class CarDealership
     class safeSort implements Comparator<Car>
     {
         /**
-         @param car1 First car
-         @param car2 Second car
+         @param car1 First car.
+         @param car2 Second car.
          */
         public int compare(Car car1, Car car2)
         {
@@ -50,8 +48,8 @@ public class CarDealership
     class maxRangeSort implements Comparator<Car>
     {
         /**
-         @param car1 First car
-         @param car2 Second car
+         @param car1 First car.
+         @param car2 Second car.
          */
         public int compare(Car car1, Car car2)
         {
@@ -84,7 +82,7 @@ public class CarDealership
     }
 
     /**
-     Buy a car based on the VIN given
+     Buy a car based on the VIN given.
      @param VIN The VIN of the car you want to buy.
      */
     public String buyCar(int VIN)
@@ -92,7 +90,7 @@ public class CarDealership
         Car car = null;
         if(cars.size() == 0) {throw new IndexOutOfBoundsException();}
 
-        for(int i = 0; i < cars.size(); i++) //Find a car object with the VIN
+        for(int i = 0; i < cars.size(); i++) //Find a car object with the VIN.
         {
             if(cars.get(i).getVIN() == VIN)
             {
@@ -102,25 +100,25 @@ public class CarDealership
         }
         if(car == null) {throw new NullPointerException();}
 
-        String sMember = sTeam.getTeamMember(); //Get a random sales team member
+        String sMember = sTeam.getTeamMember(); //Get a random sales team member.
 
         Calendar date;
         int month = (int) (Math.random() * 12);
         int day = 1;
 
-        if(month == 2) //Case for February
+        if(month == 2) //Case for February.
         {
             day = (int) (Math.random() * 29);
         }
 
-        else if(month % 2 != 0) //Case for odd-numbered months
+        else if(month % 2 != 0) //Case for odd-numbered months.
         {
             day = (int) (Math.random() * 32);
         }
 
         else
         {
-            day = (int) (Math.random() * 31); //Case for even-numbered days
+            day = (int) (Math.random() * 31); //Case for even-numbered days.
         }
 
         date = new GregorianCalendar(2019, month, day);
@@ -130,20 +128,20 @@ public class CarDealership
     }
 
     /**
-     Returns a car based on the transaction ID
-     @param transaction The transaction receipt
+     Returns a car based on the transaction ID.
+     @param transaction The transaction receipt.
      */
     public void returnCar(int transaction) throws Exception
     {
         Transaction trans = aSys.getTransaction(transaction);
 
         if(cars.contains(trans.getCar())) {throw new Exception();}
-        //Info about date bought
+        //Info about the date the car was bought.
         int dayOfBuy = trans.getDate().get(Calendar.DAY_OF_MONTH);
         int monthOfBuy = trans.getDate().get(Calendar.MONTH);
         int maxDay = trans.getDate().getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        //Info about date return
+        //Info about the date the car was returned.
         Calendar dateOfRet;
         int dayOfRet = (int) (Math.random() * ((maxDay - dayOfBuy) + 1)) + dayOfBuy;
 

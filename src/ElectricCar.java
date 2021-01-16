@@ -1,11 +1,9 @@
-//HASSAAN ABBASI
-
 /**
  ElectricCar -- This will be a type of car.
  */
 public class ElectricCar extends Car
 {
-    //Instance variables
+    //Instance Variables
     private int rechargeTime;
     private String batteryType;
 
@@ -16,7 +14,7 @@ public class ElectricCar extends Car
      @param color The color of the vehicle.
      @param power The power of the vehicle.
      @param model The model of the car.
-     @param maxRange Mileage of the car
+     @param maxRange Mileage of the car.
      @param safetyRating The safety rating of the car.
      @param AWD The All-Wheel-Drive status of the car.
      @param price The cost to buy the car.
@@ -32,7 +30,7 @@ public class ElectricCar extends Car
     }
 
     /**
-     Return the recharge time for the car.
+     Returns the recharge time for the car.
      */
     public int getRechargeTime()
     {

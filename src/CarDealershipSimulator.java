@@ -1,4 +1,3 @@
-//HASSAAN ABBASI
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -10,27 +9,27 @@ public class CarDealershipSimulator
 {
     public static void main(String[] args)
     {
-        // Create a CarDealership object
+        // Create a CarDealership object.
         CarDealership simulate = new CarDealership();
 
-        // Then create an (initially empty) array list of type Car
+        // Then creates an (initially empty) array list of type Car.
         ArrayList<Car> cars = new ArrayList<Car>();
 
-        // Then create some new car objects of different types
-        // See the cars file for car object details
-        // Add the car objects to the array list
-        // The ADD command should hand this array list to CarDealership object via the addCars() method
+        // Then creates some new car objects of different types.
+        // See the cars file for car object details.
+        // Add the car objects to the array list.
+        // The ADD command should hand this array list to CarDealership object via the addCars() method.
 
-        //Greet the user
+        //Greet the user.
         System.out.println("This is a Car Dealership simulation! Type ADD to begin. Type HELP at anytime for a list of commands.");
         System.out.println();
 
         try
         {
-            Scanner scanner = new Scanner(new File("cars.txt"));
+            Scanner scanner = new Scanner(new File("Cars.txt"));
             while(scanner.hasNextLine())
             {
-                //Read info from the txt file and initialize variables
+                //Read info from the txt file & initialize variables.
                 String mfr = scanner.next();
                 String color = scanner.next();
                 Car.Model model = Car.Model.valueOf(scanner.next());
@@ -63,24 +62,24 @@ public class CarDealershipSimulator
             System.out.println("File not found!");
         }
 
-        // Create a scanner object
+        // Create a scanner object.
         Scanner in = new Scanner(System.in);
 
-        // while the scanner has another line
+        // while the scanner has another line.
         while(in.hasNextLine())
         {
-            //    read the input line
+            // Read the input line.
             String line = in.nextLine();
 
-            //    create another scanner object (call it "commandLine" or something) using the input line instead of System.in
+            // Create another scanner object ("commandLine") using the input line instead of System.in.
             Scanner commandLine = new Scanner(line);
 
-            //    read the next word from the commandLine scanner
+            // Read the next word from the commandLine scanner.
             if(commandLine.hasNext())
             {
                 String command = commandLine.next();
 
-                //	check if the word (i.e. string) is equal to one of the commands and if so, call the appropriate method via the CarDealership object
+                // Check if the word is equal to one of the commands & if so, call the appropriate method via the CarDealership object.
                 if(command.equals("L"))
                 {
                     System.out.println();

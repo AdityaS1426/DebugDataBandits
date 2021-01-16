@@ -1,10 +1,8 @@
-//HASSAAN ABBASI
-
 import java.util.LinkedList;
 import java.util.ListIterator;
 
 /**
- Simulates the group of people that are selling cars.
+ Simulates the group of people that are selling the cars.
  */
 public class SalesTeam
 {
@@ -55,7 +53,7 @@ public class SalesTeam
     }
 
     /**
-     Returns the i person of the sales team
+     Returns the i person of the sales team.
      @param i The member to return.
      */
     public String returnIPerson(int i)
@@ -70,7 +68,7 @@ public class SalesTeam
     }
 
     /**
-     Returns the sales team size
+     Returns the sales team size.
      */
     public int salesTeamSize()
     {
