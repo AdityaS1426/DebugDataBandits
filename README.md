@@ -29,6 +29,10 @@ Click on "Projects" to view our Scrum Board.
 - Atharva & Jacob will aim to finish BankingSystem.
 - Atharva & Jacob will start on SchoolAttendanceSystem.
 
+## References & Links
+
+- [Link to CarDealershipSimulator - Aditya & Arnav Worked as a Pair on This Code](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/tree/main/src)
+
 ## How to Run CarDealershipSimulator - Aditya & Arnav
 - Open IntelliJ.
 - Click "Get From Version Control".
