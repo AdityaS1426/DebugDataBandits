@@ -29,7 +29,7 @@ Click on "Projects" to view our Scrum Board.
 - Atharva & Jacob will aim to finish BankingSystem.
 - Atharva & Jacob will start on SchoolAttendanceSystem.
 
-## How to Run CarDealershipSimulator
+## How to Run CarDealershipSimulator - Aditya & Arnav
 - Open IntelliJ.
 - Click "Get From Version Control".
 - On our GitHub Repository, click on the green "Code" button.
@@ -86,7 +86,7 @@ BUY - Buy a car.
 
 RET - Return a car.
 
-## How to Use the Bank
+## How to Use the Bank - Atharva & Jacob
 
 THIS PROGRAM IS NOT IN THE MAIN BRANCH, IT'S IN AN ALTERNATE BRANCH. PROGRAM WILL BE MOVED TO MAIN BRANCH WHEN FINAL TOUCHES ARE MADE.
 
