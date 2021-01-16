@@ -77,3 +77,14 @@ FCL - Clear the filters.
 BUY - Buy a car.
 
 RET - Return a car.
+## For the Bank
+Should give you options of whether one wants to create, display, or select account
+Press 1 - Create Account
+Press 2 - Display Account
+Press 3 - Select Account
+Press 4 - Exit
+If you choose to Select Account, you must type in the Account id number as listed in the "Display Account" Section
+After you select Account
+Press 1 - Deposit
+Press 2 - Withdraw (Can only be done if there's money in the account)
+Press 3 - Get Balance
