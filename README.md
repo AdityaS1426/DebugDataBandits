@@ -22,6 +22,13 @@ Below is the link to our Google Document containing our Project Plan. Project Pl
 
 Click on "Projects" to view our Scrum Board.
 
+## Scrum Team Goals for Week of Scrum Team Cards/Ticket Focus
+
+- Aditya & Arnav will simplify the CarDealershipSimulator code, fix errors, & fix user commands that are not working.
+- Aditya & Arnav will aim to finish CarDealershipSimulator.
+- Atharva & Jacob will aim to finish BankingSystem.
+- Atharva & Jacob will start on SchoolAttendanceSystem.
+
 ## How to Run CarDealershipSimulator
 - Open IntelliJ.
 - Click "Get From Version Control".
