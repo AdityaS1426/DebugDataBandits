@@ -33,7 +33,7 @@ Click on "Projects" to view our Scrum Board.
 
 - [Link to CarDealershipSimulator - Aditya & Arnav Worked as a Pair on This Code](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/tree/main/src)
 - To find Aditya's Scrum Card, go to the Scrum Board by clicking "Projects", & look in the "In Progress" column.
-- [Provided link for evidence of work](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/tree/bank-init/.idea)
+- [Provided Link for Evidence of Work for Jacob](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/tree/bank-init/.idea)
 
 ## How to Run CarDealershipSimulator - Aditya & Arnav
 - Open IntelliJ.
