@@ -80,6 +80,9 @@ BUY - Buy a car.
 RET - Return a car.
 
 ## How to Use the Bank
+
+THIS PROGRAM IS NOT IN THE MAIN BRANCH, IT'S IN AN ALTERNATE BRANCH. PROGRAM WILL BE MOVED TO MAIN BRANCH WHEN FINAL TOUCHES ARE MADE.
+
 The program should give you options of whether one wants to create, display, or select an account.
 Press 1 - Create Account
 
