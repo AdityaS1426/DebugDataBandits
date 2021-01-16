@@ -1,157 +1,284 @@
+//HASSAAN ABBASI
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.GregorianCalendar;
-import java.util.Calendar;
+import java.util.InputMismatchException;
 
+/**
+ CarDealership -- This will be a car dealership.
+ */
 public class CarDealership
 {
-    ArrayList<Car> cars;
-    SalesTeam salesTeam;
-    AccountingSystem accountingSystem;
+    //Objects for use
+    SalesTeam sTeam = new SalesTeam();
+    AccountingSystem aSys = new AccountingSystem();
 
-    // These are filters to sort the cars.
-    boolean electricFilter = false;
-    boolean priceFilter = false;
-    double  priceMin    = 0;
-    double  priceMax    = 0;
-    boolean AWDFilter = false;
+    //Instance variable
+    private ArrayList<Car> cars;
+
+    //Filter variables
+    public boolean ele = false;
+    public boolean AWD = false;
+    public boolean price = false;
+    public double minPrice = 0.0;
+    public double maxPrice = 0.0;
 
     /**
-     * Constructor initializes the variables.
+     safeSort -- Special inner class to sort by safety rating.
+     */
+    class safeSort implements Comparator<Car>
+    {
+        /**
+         @param car1 First car
+         @param car2 Second car
+         */
+        public int compare(Car car1, Car car2)
+        {
+            if(car1.getSafetyRating() < car2.getSafetyRating()) {return -1;}
+            else if(car1.getSafetyRating() > car2.getSafetyRating()) {return 1;}
+            return 0;
+        }
+    }
+
+    /**
+     maxRangeSort -- Special inner class to sort by max range.
+     */
+    class maxRangeSort implements Comparator<Car>
+    {
+        /**
+         @param car1 First car
+         @param car2 Second car
+         */
+        public int compare(Car car1, Car car2)
+        {
+            if(car1.getMaxRange() < car2.getMaxRange()) {return -1;}
+            else if(car1.getMaxRange() > car2.getMaxRange()) {return 1;}
+            return 0;
+        }
+    }
+
+    /**
+     A constructor method to have cars refer to an empty
+     array list.
      */
     public CarDealership()
     {
         cars = new ArrayList<Car>();
-        salesTeam = new SalesTeam();
-        accountingSystem = new AccountingSystem();
     }
 
     /**
-     * Adds cars to the ArrayList.
+     Add the cars from the given array list to the
+     instance array list.
+     @param newCars A list of car objects.
      */
     public void addCars(ArrayList<Car> newCars)
     {
-        cars.addAll(newCars);
-        newCars.clear();
+        for(Car x : newCars)
+        {
+            cars.add(x);
+        }
     }
 
     /**
-     * Buys the car with the corresponding VIN number.
-     * Removes it from the cars list.
+     Buy a car based on the VIN given
+     @param VIN The VIN of the car you want to buy.
      */
     public String buyCar(int VIN)
     {
-        Iterator<Car> carIter = cars.iterator();
         Car car = null;
-        while (carIter.hasNext())
+        if(cars.size() == 0) {throw new IndexOutOfBoundsException();}
+
+        for(int i = 0; i < cars.size(); i++) //Find a car object with the VIN
         {
-            Car iter = carIter.next();
-            if (iter.getVIN()==VIN)
+            if(cars.get(i).getVIN() == VIN)
             {
-                car = iter;
-                carIter.remove();
+                car = cars.get(i);
+                cars.remove(i);
             }
         }
+        if(car == null) {throw new NullPointerException();}
 
-        GregorianCalendar date;
-        int year = 2019;
-        int month = (int)(Math.random()*12);
-        int day = (int)(Math.random()*((31-1)+1));
-        date = new GregorianCalendar(year, month, day);
-        return accountingSystem.add(date, car, salesTeam.getRandom(), Transaction.TransactionType.BUY, car.getPrice());
+        String sMember = sTeam.getTeamMember(); //Get a random sales team member
+
+        Calendar date;
+        int month = (int) (Math.random() * 12);
+        int day = 1;
+
+        if(month == 2) //Case for February
+        {
+            day = (int) (Math.random() * 29);
+        }
+
+        else if(month % 2 != 0) //Case for odd-numbered months
+        {
+            day = (int) (Math.random() * 32);
+        }
+
+        else
+        {
+            day = (int) (Math.random() * 31); //Case for even-numbered days
+        }
+
+        date = new GregorianCalendar(2019, month, day);
+
+        String receipt = aSys.add(date, car, sMember, "BUY", car.getPrice());
+        return receipt;
     }
 
     /**
-     * Returns the car with the corresponding transaction ID.
-     * Adds it back to the cars list.
+     Returns a car based on the transaction ID
+     @param transaction The transaction receipt
      */
-    public String returnCar(int id)
+    public void returnCar(int transaction) throws Exception
     {
-        Transaction transaction = AccountingSystem.getTransaction(id);
-        GregorianCalendar date = transaction.getDate();
-        int month = date.get(Calendar.MONTH);
-        int day = date.get(Calendar.DAY_OF_MONTH);
-        int returnDay = (int)(Math.random()*(28-day)+day);
+        Transaction trans = aSys.getTransaction(transaction);
 
-        Car car = transaction.getCar();
-        GregorianCalendar returnDate = new GregorianCalendar(2019, month, returnDay);
-        cars.add(car);
-        return accountingSystem.add(returnDate, car, salesTeam.getRandom(), Transaction.TransactionType.RETURN, car.getPrice());
+        if(cars.contains(trans.getCar())) {throw new Exception();}
+        //Info about date bought
+        int dayOfBuy = trans.getDate().get(Calendar.DAY_OF_MONTH);
+        int monthOfBuy = trans.getDate().get(Calendar.MONTH);
+        int maxDay = trans.getDate().getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        //Info about date return
+        Calendar dateOfRet;
+        int dayOfRet = (int) (Math.random() * ((maxDay - dayOfBuy) + 1)) + dayOfBuy;
+
+        dateOfRet = new GregorianCalendar(2019, monthOfBuy, dayOfRet);
+
+        aSys.add(dateOfRet, trans.getCar(), trans.getSalesPerson(), "RETURN", trans.getSalePrice());
+        cars.add(trans.getCar());
+        String reciept = trans.display();
+        System.out.println(reciept);
     }
 
     /**
-     * Displays all the cars available.
+     Shows the car list based on filters.
      */
     public void displayInventory()
     {
-        System.out.println("VIN\tMANUFACTURER\tCOLOR\tMODEL\tPRICE\t\tSAFETY\tRANGE");
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\tRATING");
-
-        for (int i = 0; i < cars.size(); i++)
+        if(!ele && !AWD && !price)
         {
-            Car car = cars.get(i);
-            System.out.println(car.display());
-        }
-        System.out.println("");
-    }
-
-    /**
-     * Clears all the filters.
-     */
-    public void filtersClear()
-    {
-        electricFilter = false;
-        priceFilter = false;
-        AWDFilter = false;
-    }
-
-    /**
-     * Filters by price.
-     */
-    public void filterByPrice(double min, double max)
-    {
-        priceFilter = true;
-        priceMin    = min;
-        priceMax    = max;
-
-        for (int i = 0; i < cars.size(); i++)
-        {
-            if (cars.get(i).getPrice() >= min && cars.get(i).getPrice() <= max)
+            for(int i = 0; i < cars.size(); i++)
             {
                 System.out.println(cars.get(i).display());
             }
         }
 
+        else if(ele && AWD && price)
+        {
+            for(int i = 0; i < cars.size(); i++)
+            {
+                if(cars.get(i).getPower().equals(Vehicle.powerSource.ELECTRIC_MOTOR) &&
+                        cars.get(i).getAWD() == true && cars.get(i).getPrice() >= minPrice
+                        && cars.get(i).getPrice() <= maxPrice)
+                {
+                    System.out.println(cars.get(i).display());
+                }
+            }
+        }
+
+        else if(ele && AWD)
+        {
+            for(int i = 0; i < cars.size(); i++)
+            {
+                if(cars.get(i).getPower().equals(Vehicle.powerSource.ELECTRIC_MOTOR) &&
+                        cars.get(i).getAWD() == true)
+                {
+                    System.out.println(cars.get(i).display());
+                }
+            }
+        }
+
+        else if(AWD)
+        {
+            for(int i = 0; i < cars.size(); i++)
+            {
+                if(cars.get(i).getAWD() == true)
+                {
+                    System.out.println(cars.get(i).display());
+                }
+            }
+        }
+
+        else if(ele && price)
+        {
+            for(int i = 0; i < cars.size(); i++)
+            {
+                if(cars.get(i).getPower().equals(Vehicle.powerSource.ELECTRIC_MOTOR) &&
+                        cars.get(i).getPrice() >= minPrice && cars.get(i).getPrice() <= maxPrice)
+                {
+                    System.out.println(cars.get(i).display());
+                }
+            }
+        }
+
+        else if(ele)
+        {
+            for(int i = 0; i < cars.size(); i++)
+            {
+                if(cars.get(i).getPower().equals(Vehicle.powerSource.ELECTRIC_MOTOR))
+                {
+                    System.out.println(cars.get(i).display());
+                }
+            }
+        }
+
+        else if(price)
+        {
+            for(int i = 0; i < cars.size(); i++)
+            {
+                if(cars.get(i).getPrice() >= minPrice && cars.get(i).getPrice() <= maxPrice)
+                {
+                    System.out.println(cars.get(i).display());
+                }
+            }
+        }
     }
 
     /**
-     * Filters by electric type.
+     Filter the car list by electric cars.
      */
     public void filterByElectric()
     {
-        electricFilter = true;
-
-        for (int i = 0; i < cars.size(); i++)
-        {
-            if (cars.get(i).getElectric())
-            {
-                System.out.println(cars.get(i).display());
-            }
-        }
-
+        ele = true;
     }
+
     /**
-     * Filter by drivetrain.
+     Filter the car list by AWD cars.
      */
     public void filterByAWD()
     {
-        AWDFilter = true;
+        AWD = true;
     }
 
     /**
-     * Sorts the cars by their prices.
+     Filter the car list by given price range.
+     @param min The minimum price.
+     @param max The maximum price.
+     */
+    public void filterByPrice(double min, double max)
+    {
+        price = true;
+        minPrice = min;
+        maxPrice = max;
+    }
+
+    /**
+     Clear all filters.
+     */
+    public void filtersClear()
+    {
+        ele = false;
+        AWD = false;
+        price = false;
+    }
+
+    /**
+     Sort by the price.
      */
     public void sortByPrice()
     {
@@ -159,39 +286,18 @@ public class CarDealership
     }
 
     /**
-     * Sorts the cars by their safety rating.
+     Sort by the safety rating.
      */
-    private class SafetyRatingComparator implements Comparator<Car>
-    {
-        public int compare(Car a, Car b)
-        {
-            if      (a.safetyRating < b.safetyRating) return  1;
-            else if (a.safetyRating > b.safetyRating) return -1;
-            else                                      return  0;
-        }
-    }
-
     public void sortBySafetyRating()
     {
-        Collections.sort(cars,new SafetyRatingComparator());
+        Collections.sort(cars, new safeSort());
     }
 
     /**
-     * Sorts the cars by their max range.
+     Sort by the max range.
      */
-    private class RangeComparator implements Comparator<Car>
-    {
-        public int compare(Car a, Car b)
-        {
-            if      (a.maxRange < b.maxRange) return  1;
-            else if (a.maxRange > b.maxRange) return -1;
-            else                              return  0;
-        }
-    }
-
     public void sortByMaxRange()
     {
-        Collections.sort(cars,new RangeComparator());
+        Collections.sort(cars, new maxRangeSort());
     }
-
 }

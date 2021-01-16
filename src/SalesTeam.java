@@ -1,78 +1,79 @@
-import java.util.ListIterator;
-import java.util.LinkedList;
+//HASSAAN ABBASI
 
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+/**
+ Simulates the group of people that are selling cars.
+ */
 public class SalesTeam
 {
-    static LinkedList<String> team;
+    //Instance Variables
+    private LinkedList<String> team = new LinkedList<String>();
 
     /**
-     * Constructor initializes the LinkedList and adds the names of the sales team members.
+     Constructor for the sales team. A group of 6.
      */
     public SalesTeam()
     {
-        team = new LinkedList<String>();
-        team.add("Kingly");
-        team.add("Danny");
-        team.add("Ken");
-        team.add("Vanessa");
-        team.add("Jimmy");
-        team.add("Anthony");
-        team.add("Alex");
-
+        team.add("Jimbo");
+        team.add("Moby");
+        team.add("Harley");
+        team.add("Santa");
+        team.add("Elon");
+        team.add("Gates");
     }
 
     /**
-     * Counts the number of team members.
+     Returns a random member from the team.
+     @param team The list of team members.
      */
-    public int countTeam()
+    public String getTeamMember()
     {
+        int rand = (int) (Math.random()*5);
         ListIterator<String> iter = team.listIterator();
-        int counter = 0;
-        while(iter.hasNext())
+        for(int i = 0; i < rand; i++)
         {
-            counter++;
             iter.next();
         }
-        return counter;
+        return iter.next();
     }
 
     /**
-     * Gets a random team member.
+     Returns the whole team.
+     @param team The list of team members.
      */
-    public String getRandom()
+    public String teamCombine()
     {
         ListIterator<String> iter = team.listIterator();
-        int index =  (int)(Math.random() * team.size());
-        iter = team.listIterator(index);
-        String name = iter.next();
-        return name;
-    }
-
-    /**
-     * Displays the names of all the team members.
-     */
-    public void displayTeam()
-    {
-        ListIterator<String> iter = team.listIterator();
-        System.out.println("----------[SALES TEAM]----------\n");
+        String totalTeam = "";
         while(iter.hasNext())
         {
-            String name = iter.next();
-            System.out.println(name);
+            totalTeam = totalTeam + " " + iter.next();
         }
+        return "Team:" + totalTeam;
     }
 
     /**
-     * Gets a certain team member based on their index.
+     Returns the i person of the sales team
+     @param i The member to return.
      */
-    public String getASalesPerson(int index)
+    public String returnIPerson(int i)
     {
         ListIterator<String> iter = team.listIterator();
-        String name = null;
-        for (int i = 0; i <= index; i++)
+        for(int x = 0; x < i; x++)
         {
-            name = iter.next();
+            iter.next();
+
         }
-        return name;
+        return iter.next();
+    }
+
+    /**
+     Returns the sales team size
+     */
+    public int salesTeamSize()
+    {
+        return team.size();
     }
 }

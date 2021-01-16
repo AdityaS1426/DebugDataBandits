@@ -1,34 +1,56 @@
+//HASSAAN ABBASI
+
+/**
+ ElectricCar -- This will be a type of car.
+ */
 public class ElectricCar extends Car
 {
-    int    rechargeTime;//minutes
-    String batteryType;
+    //Instance variables
+    private int rechargeTime;
+    private String batteryType;
 
     /**
-     * Constructor initializes the variables.
+     A constructor method to initialize the properties of a car with the given
+     parameters.
+     @param mfr The manufacturer of the vehicle.
+     @param color The color of the vehicle.
+     @param power The power of the vehicle.
+     @param model The model of the car.
+     @param maxRange Mileage of the car
+     @param safetyRating The safety rating of the car.
+     @param AWD The All-Wheel-Drive status of the car.
+     @param price The cost to buy the car.
+     @param rechargeTime The recharge time in minutes.
      */
-    public ElectricCar(String manuf, String color, Model model, Vehicle.PowerSource power,
-                       double safety, int range, boolean awd, double price, int rch)
+    public ElectricCar(String mfr, String color, Model model, powerSource power, double safetyRating,
+                       int maxRange, boolean AWD, double price, String batteryType,
+                       int rechargeTime)
     {
-        super(manuf, color, model, Vehicle.PowerSource.ELECTRIC_MOTOR, safety, range, awd, price);
-        rechargeTime = rch;
-        batteryType = "Lithium";
-    }
-
-    public void setRechargeTime(int time)
-    {
-        rechargeTime = time;
-    }
-
-    public void batteryType(String type)
-    {
-        batteryType = type;
+        super(mfr, color, model, power,  safetyRating, maxRange, AWD, price);
+        this.setRechargeTime(rechargeTime);
+        this.batteryType = batteryType;
     }
 
     /**
-     * Displays the information of the electric car.
+     Return the recharge time for the car.
      */
+    public int getRechargeTime()
+    {
+        return rechargeTime;
+    }
+
+    /**
+     Set the recharge time for the car.
+     @param rechargeTime The rechargeTime to set for the car.
+     */
+    public void setRechargeTime(int rechargeTime)
+    {
+        this.rechargeTime = rechargeTime;
+    }
+
     public String display()
     {
-        return super.display() + " " + "EL, BAT: " + batteryType + " RCH: " + rechargeTime;
+        return super.display() + batteryType + ", " + rechargeTime;
     }
+
 }

@@ -1,90 +1,94 @@
-import java.util.TreeMap;
-import java.time.format.DateTimeFormatter;
-import java.util.GregorianCalendar;
-import java.util.Map;
+//HASSAAN ABBASI
 
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
+/**
+ Objects of this class store information about the buying or returning of a car.
+ */
 public class Transaction
 {
-
-    static int transactionID;
-    static GregorianCalendar date;
-    static Car car;
-    static String salesPerson;
-    static double price;
-    public Map<String, Object> infoMap;
-
-    public enum TransactionType
-    {
-        BUY, RETURN;
-    }
-    public static TransactionType type;
+    //Instance Variables
+    private int id;
+    private GregorianCalendar date;
+    private Car car;
+    private String salesPerson;
+    private String type;
+    private double salePrice;
 
     /**
-     * When a transaction object is made, a map for that transaction is created, where the given values are stored.
+     Constructor for the Transaction class
+     @param id ID of the transaction
+     @param date Date of transaction
+     @param car Car being bought or returned
+     @param salesPerson Name of the sales person
+     @param type Type of transaction (BUY or RETURN)
+     @param salePrice Price the car was sold for
      */
-    public Transaction(int transactionID2, GregorianCalendar date2, Car car2, String salesPerson2, TransactionType type2, double price2)
+    public Transaction(int id, GregorianCalendar date, Car car, String salesPerson, String type, double salePrice)
     {
-        transactionID = transactionID2;
-        date = date2;
-        car = car2;
-        salesPerson = salesPerson2;
-        type = type2;
-        price = price2;
-
-
-        infoMap = new TreeMap<String, Object>();
-        infoMap.put("ID", transactionID);
-        infoMap.put("Date", date);
-        infoMap.put("Car", car);
-        infoMap.put("SP", salesPerson);
-        infoMap.put("Type", type);
-        infoMap.put("Price", price);
-
+        this.id = id;
+        this.date = date;
+        this.car = car;
+        this.salesPerson = salesPerson;
+        this.type = type;
+        this.salePrice = salePrice;
     }
 
     /**
-     * Displays the transaction information.
+     Returns a string describing the transaction
      */
     public String display()
     {
-        String formatdate = date.toZonedDateTime().format(DateTimeFormatter.ofPattern("d MMM uuuu"));
-        return
-                "------------------------------\n"
-                        + "[Transaction]\t[ID: " + transactionID + "]\n"
-                        + "\nDate:\t\t" + formatdate
-                        + "\nType:\t\t" + type
-                        + "\nSalesPerson:\t" + salesPerson
-                        + "\nVIN:\t\t" + car.getVIN()
-                        + "\nModel:\t\t" + car.getModel()
-                        + "\nPrice:\t\t$" + price
-                ;
-
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM dd, yyyy");
+        return "ID: " + id + " - Date: " + sdf.format(date.getTime()) + " - " + type + " - Sales Person: " +
+                salesPerson + " - " + car.display() + " Sold for: " + salePrice;
     }
 
     /**
-     * The following methods get the variable values from the map.
+     Get the date.
      */
-    public GregorianCalendar getDate()
-    {
-        return (GregorianCalendar) infoMap.get("Date");
+    public GregorianCalendar getDate() {
+        return date;
     }
 
+    /**
+     Get the ID
+     */
+    public int getId()
+    {
+        return id;
+    }
+
+    /**
+     Get the car
+     */
     public Car getCar()
     {
-        return (Car) infoMap.get("Car");
+        return car;
     }
 
-    public double getPrice()
-    {
-        return (double) infoMap.get("Price");
-    }
-    public Transaction.TransactionType getType()
-    {
-        return (TransactionType) infoMap.get("Type");
-    }
+    /**
+     Get the sales person
+     */
     public String getSalesPerson()
     {
-        return (String) infoMap.get("SP");
+        return salesPerson;
+    }
+
+    /**
+     Get the sale price
+     */
+    public Double getSalePrice()
+    {
+        return salePrice;
+    }
+
+    /**
+     Get the type of transaction
+     */
+    public String getType() {
+        return type;
     }
 
 }

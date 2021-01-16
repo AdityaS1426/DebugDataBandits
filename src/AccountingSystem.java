@@ -1,215 +1,315 @@
-import java.util.TreeMap;
+//HASSAAN ABBASI
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.time.format.DateTimeFormatter;
-import java.util.GregorianCalendar;
-import java.util.Calendar;
-import java.text.DecimalFormat;
+import java.util.TreeMap;
 
+/**
+ Works with Transaction objects to simulate an accounting system
+ */
 public class AccountingSystem
 {
-    private static Map<Integer, Transaction> transactionMap;
-    private static Map<Integer, Integer> monthSalesMap;
-    private static Map<String, Integer> personSalesMap;
-    private static Transaction newTransaction;
-    private static double totalSales;
-    private static int totalSold;
-    private static int totalReturned;
+    //Instance Variable
+    private Map<Integer, Transaction> transactions;
 
     /**
-     * The constructor initializes the maps for transactions with ID, the amount of sales per month, the amount of sales per salesperson,
-     and initializes variables.
+     A constructor method to have transactions refer to an empty
+     array list.
      */
     public AccountingSystem()
     {
-        transactionMap = new TreeMap<Integer, Transaction>();
-        monthSalesMap = new TreeMap<Integer, Integer>();
-        personSalesMap = new TreeMap<String, Integer>();
-
-        monthSalesMap.put(0, 0);
-        monthSalesMap.put(1, 0);
-        monthSalesMap.put(2, 0);
-        monthSalesMap.put(3, 0);
-        monthSalesMap.put(4, 0);
-        monthSalesMap.put(5, 0);
-        monthSalesMap.put(6, 0);
-        monthSalesMap.put(7, 0);
-        monthSalesMap.put(8, 0);
-        monthSalesMap.put(9, 0);
-        monthSalesMap.put(10, 0);
-        monthSalesMap.put(11, 0);
-
-        personSalesMap.put("Kingly", 0);
-        personSalesMap.put("Danny", 0);
-        personSalesMap.put("Ken", 0);
-        personSalesMap.put("Vanessa", 0);
-        personSalesMap.put("Jimmy", 0);
-        personSalesMap.put("Anthony", 0);
-        personSalesMap.put("Alex", 0);
-
-        totalSales = 0;
-        totalSold = 0;
-        totalReturned = 0;
+        transactions = new HashMap<Integer, Transaction>();
     }
 
     /**
-     * Adds a new transaction to the map, updates variables, and updates maps.
+     Adds transaction to hash map
+     @param date Date of transaction
+     @param car Car being bought or returned
+     @param salesPerson Name of the sales person
+     @param type Type of transaction (BUY or RETURN)
+     @param salePrice Price the car was sold for
      */
-    public String add(GregorianCalendar date, Car car, String salesPerson,
-                      Transaction.TransactionType type, double salePrice)
+    public String add(Calendar date, Car car, String salesPerson, String type, double salePrice)
     {
-        int id = 1 + (int)(Math.random() * (99-1)+1);
-        newTransaction = new Transaction(id, date, car, salesPerson, type, salePrice);
-        transactionMap.put(id, newTransaction);
-
-        int month = date.get(Calendar.MONTH);
-        int amount = monthSalesMap.get(month) + 1;
-        monthSalesMap.put(month, amount);
-
-        int spAmount = personSalesMap.get(salesPerson) + 1;
-        personSalesMap.put(salesPerson, spAmount);
-
-        if (type == Transaction.TransactionType.BUY)
-        {
-            totalSold++;
-        }
-
-        if (type == Transaction.TransactionType.RETURN)
-        {
-            totalReturned++;
-        }
-
-        totalSales += salePrice;
-
-        return newTransaction.display();
+        int id = (int) (Math.random() * 100);
+        Transaction tran = new Transaction(id, (GregorianCalendar) date, car, salesPerson, type, salePrice);
+        transactions.put(id, tran);
+        return tran.display();
     }
 
     /**
-     * Gets a certain transaction, and returns a transaction with the corresponding ID.
+     Finds a transaction based on transaction ID
+     @param id The ID of the car to retrieve
      */
-    public static Transaction getTransaction(int id)
+    public Transaction getTransaction(int id)
     {
-        if (transactionMap.get(id) != null)
+        for(Integer trID : transactions.keySet())
         {
-            return transactionMap.get(id);
-        } else {
-            return null;
+            if(trID == id) {return transactions.get(trID);}
+        }
+        return null;
+    }
+
+    /**
+     Returns the whole list of transactions that occurred.
+     */
+    public void getTransactionList()
+    {
+        for(Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getDate().get(Calendar.YEAR) == 2019) {System.out.println(transactions.get(trID).display());}
         }
     }
 
     /**
-     * Displays all the transactions by looping through and displaying the map of transactionIDs and transaction objects.
+     Returns the top sales person
      */
-    public void getAllTransactions()
+    public String topSalesPerson()
     {
-        Set<Integer> keySet = transactionMap.keySet();
-        System.out.println("-------------------------------");
+        SalesTeam teamObj = new SalesTeam();
+        Map<String, Integer> salesPeopleSells = new TreeMap<String,Integer>();
+        Set<String> keys = salesPeopleSells.keySet();
+        String topSP =""; //Top sales person
+        String topSPTie = ""; //Top sales person string for tied sales
+        int top = 0; //Number for top sales
 
-        for (Integer key : keySet)
+        //Mapping the sales team members to initial sales of 0
+        for(int i = 0; i < teamObj.salesTeamSize(); i++)
         {
-            Transaction value = transactionMap.get(key);
-            String formatdate = value.getDate().toZonedDateTime().format(DateTimeFormatter.ofPattern("d MMM uuuu"));
-            System.out.println("ID: " + key +" "+ formatdate + " " + value.getType()
-                    + " SalesPerson: " +  value.getSalesPerson() + " Car: "
-                    + getCar(key).display());
-
+            salesPeopleSells.put(teamObj.returnIPerson(i), 0);
         }
-    }
 
-    /**
-     * Gets a certain car. Returns the car.
-     */
-    public Car getCar(int id)
-    {
-        if (transactionMap.get(id) != null)
+        //Updating the sales for every team member based on BUY and RETURN
+        for(Integer trID : transactions.keySet())
         {
-            Transaction transaction = transactionMap.get(id);
-            Car car = transaction.getCar();
-            return car;
-
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Displays the salesperson(s) with the highest amount of sales.
-     */
-    public void topSalesPerson()
-    {
-        String topSalesPerson = "";
-        int topAmount = 0;
-        Set<String> keySet = personSalesMap.keySet();
-        for (String key : keySet)
-        {
-            int amount = personSalesMap.get(key);
-            if (amount > topAmount)
+            if(transactions.get(trID).getType().equals("BUY"))
             {
-                topSalesPerson = key;
-                topAmount = amount;
+                String person = transactions.get(trID).getSalesPerson();
+                int sales = salesPeopleSells.get(person) + 1;
+                salesPeopleSells.put(person, sales);
             }
-            if (amount == topAmount && amount != 0 && !key.equals(topSalesPerson))
+
+            else if(transactions.get(trID).getType().equals("RETURN"))
             {
-                topSalesPerson += " and " + key;
+                String person = transactions.get(trID).getSalesPerson();
+                int sales = salesPeopleSells.get(person) - 1;
+                salesPeopleSells.put(person, sales);
             }
         }
 
-        System.out.println("Top SP: " + topSalesPerson + " Amount: " + topAmount);
-    }
-
-    /**
-     * Displays the total sales, total number of cars sold, average sales, total returned, month with the most
-     * sales, and the amount of cars sold in the most successful month.
-     */
-    public void stats()
-    {
-        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"};
-        int topMonth = 0;
-        int topMonthValue = 0;
-        Set<Integer> keySet = monthSalesMap.keySet();
-
-        for (int key : keySet)
+        //Finding the top sales person
+        for(String key : keys)
         {
-            int value = monthSalesMap.get(key);
-            if (value >= topMonthValue)
+            if(salesPeopleSells.get(key) > top)
             {
-                topMonthValue = value;
-                topMonth = key;
+                topSP = key;
+                top = salesPeopleSells.get(key);
+            }
+
+        }
+
+        //Finding another top sales person if there's a tie
+        for(String key : keys)
+        {
+            if(salesPeopleSells.get(key) == top && !key.equals(topSP))
+            {
+                topSPTie = topSPTie + " " + key;
             }
         }
 
-        double avg = totalSales/12;
-
-        DecimalFormat df = new DecimalFormat("#.##");
-
-        String str = "Total Sales: $" + df.format(totalSales)
-                + " Total Sold: " + totalSold
-                + " Avg Sales: $" + df.format(avg)
-                + " Total Returned: " + totalReturned
-                + " Best Month -> " + months[topMonth]
-                + ": cars sold -> " + topMonthValue;
-        System.out.print(str);
+        if(top == 0) {return "No top sales person currently.";}
+        else if(!topSPTie.equals("")) {return "Team members with the most sales (" + top + " sales): " + topSPTie + " " + topSP;}
+        else {return "Top Sales Person: " + topSP + " with " + top + " sales!";}
     }
 
     /**
-     * Displays the transactions within the indicated month.
+     Returns the transactions that occurred in a given month.
+     @param i The month number
      */
-    public void salesM(int month)
+    public void getTransactionListM(int i)
     {
-        Set<Integer> keySet = transactionMap.keySet();
-        System.out.println("-------------------------------");
-
-        for (Integer key : keySet)
+        for(Integer trID : transactions.keySet())
         {
-            Transaction value = transactionMap.get(key);
-            if (value.getDate().get(Calendar.MONTH) == month)
-            {
-                String formatdate = value.getDate().toZonedDateTime().format(DateTimeFormatter.ofPattern("d MMM uuuu"));
-                System.out.println("ID: " + key +" "+ formatdate + " " + value.getType()
-                        + " SalesPerson: " +  value.getSalesPerson() + " Car: "
-                        + getCar(key).display());
-            }
+            if(transactions.get(trID).getDate().get(Calendar.MONTH) == i) {System.out.println(transactions.get(trID).display());}
         }
     }
 
+    /**
+     Returns the statistics of transactions in a year.
+     */
+    public void getStats()
+    {
+        int totalSales = 0; //Total number of sales
+        int averageSales = 0; //Average sales
+        int carsSold = 0; //Number of cars sold
+        int highestSalesMNum = 0; //Highest sales month in number format
+        int mostSales = 0; //The highest number of sales
+        String highestSalesM = ""; //Highest sales month in string format
+        String highestSalesMTie = ""; //Highest sales month string in case there's a tie
+        int carsRet = 0; //Number of cars returned
+
+        //Total sales function
+        for (Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getType().equals("BUY"))
+            {
+                totalSales += transactions.get(trID).getSalePrice();
+            }
+            else
+            {
+                totalSales -= transactions.get(trID).getSalePrice();
+            }
+        }
+
+        //Average sales function
+        averageSales = totalSales / 12;
+
+        //Cars sold/returned function
+        for (Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getType().equals("BUY"))
+            {
+                carsSold++;
+            }
+            else
+            {
+                carsSold--;
+                carsRet++;
+            }
+        }
+
+        //Highest sales month function
+        Map<Integer, Integer> highestM = new TreeMap<Integer,Integer>(); //Mapping month number to sales
+        Set<Integer> keys = highestM.keySet();
+        //SimpleDateFormat sdf = new SimpleDateFormat("MMM");
+
+        for(Integer trID : transactions.keySet())
+        {
+            highestM.put(transactions.get(trID).getDate().get(Calendar.MONTH), 0);
+        }
+
+        for(Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getType().equals("BUY"))
+            {
+                int sales = highestM.get(transactions.get(trID).getDate().get(Calendar.MONTH)) + 1;
+                highestM.put(transactions.get(trID).getDate().get(Calendar.MONTH), sales);
+            }
+
+            else if(transactions.get(trID).getType().equals("RETURN"))
+            {
+                int sales = highestM.get(transactions.get(trID).getDate().get(Calendar.MONTH)) - 1;
+                highestM.put(transactions.get(trID).getDate().get(Calendar.MONTH), sales);
+            }
+        }
+
+        for(Integer key : keys)
+        {
+            if(highestM.get(key) > mostSales)
+            {
+                mostSales = highestM.get(key);
+                highestSalesMNum = key;
+            }
+
+        }
+
+        for(Integer month : keys)
+        {
+            if(highestM.get(month) == mostSales)
+            {
+                switch(month)
+                {
+                    case 0:
+                        highestSalesMTie += " Jan ";
+                        break;
+                    case 1:
+                        highestSalesMTie += " Feb ";
+                        break;
+                    case 2:
+                        highestSalesMTie += " Mar ";
+                        break;
+                    case 3:
+                        highestSalesMTie += " Apr ";
+                        break;
+                    case 4:
+                        highestSalesMTie += " May ";
+                        break;
+                    case 5:
+                        highestSalesMTie += " Jun ";
+                        break;
+                    case 6:
+                        highestSalesM += " Jul ";
+                        break;
+                    case 7:
+                        highestSalesMTie += " Aug ";
+                        break;
+                    case 8:
+                        highestSalesMTie += " Sep ";
+                        break;
+                    case 9:
+                        highestSalesMTie += " Oct ";
+                        break;
+                    case 10:
+                        highestSalesMTie += " Nov ";
+                        break;
+                    case 11:
+                        highestSalesMTie += " Dec ";
+                        break;
+                }
+            }
+
+        }
+
+        switch(highestSalesMNum)
+        {
+            case 0:
+                if(totalSales == 0)
+                {
+                    highestSalesM = "No highest sales month";
+                    break;
+                }
+                highestSalesM = "Jan";
+                break;
+            case 1:
+                highestSalesM = "Feb";
+                break;
+            case 2:
+                highestSalesM = "Mar";
+                break;
+            case 3:
+                highestSalesM = "Apr";
+                break;
+            case 4:
+                highestSalesM = "May";
+                break;
+            case 5:
+                highestSalesM = "Jun";
+                break;
+            case 6:
+                highestSalesM = "Jul";
+                break;
+            case 7:
+                highestSalesM = "Aug";
+                break;
+            case 8:
+                highestSalesM = "Sep";
+                break;
+            case 9:
+                highestSalesM = "Oct";
+                break;
+            case 10:
+                highestSalesM = "Nov";
+                break;
+            case 11:
+                highestSalesM = "Dec";
+                break;
+        }
+
+        if(mostSales == 0 || carsSold == 0) {System.out.println("Total Sales: " + totalSales + " - Average Sales: " + averageSales + " - Cars Sold: " + carsSold + " - There is no highest sales month - " + "Cars Returned: " + carsRet);}
+        else  {System.out.println("Total Sales: " + totalSales + " - Average Sales: " + averageSales + " - Cars Sold: " + carsSold + " - Highest Sales Month(s): " + highestSalesMTie + " - Cars Returned: " + carsRet);}
+    }
 }

@@ -1,58 +1,112 @@
-import java.lang.Math;
+//HASSAAN ABBASI
+
+/**
+ Vehicle -- This will be our basic blueprint for a vehicle object. From
+ this, we shall form more detailed vehicles such as electric cars.
+ */
 public class Vehicle
 {
-    public enum PowerSource
+    //Enum for power source
+    public static enum powerSource
     {
-        GAS_ENGINE, DIESEL_ENGINE, ELECTRIC_MOTOR;
+        ELECTRIC_MOTOR, GAS_ENGINE;
     }
 
-    public PowerSource power;
-    String manuf;
-    String color;
-    int    numWheels;
-    int VIN; // Vehicle Identification Number
+    //Instance variables
+    public powerSource power;
+    private String mfr;
+    private String color;
+    private int VIN;
 
     /**
-     * Constructor initializes the variables. The VIN is randomly generated.
+     A constructor method to initialize the properties of a vehicle with the given
+     parameters.
+     @param mfr The manufacturer of the vehicle.
+     @param color The color of the vehicle.
+     @param power The power of the vehicle.
      */
-    public Vehicle()
+    public Vehicle(String mfr, String color, powerSource power)
     {
-        this.manuf = "";
-        VIN = 100 + (int)(Math.random() * 400);
-    }
-
-    public Vehicle(String manuf, String color, int numWheels, PowerSource power)
-    {
-        this.manuf     = manuf;
-        this.color     = color;
-        this.numWheels = numWheels;
-        this.power     = power;
-        VIN = 100 + (int)(Math.random() * 400);
+        this.mfr = mfr;
+        this.color = color;
+        this.power = power;
+        VIN = (int)(Math.random()*400 + 100);
     }
 
     /**
-     * Displays the vehicle information.
+     Return the manufacturer of the vehicle.
      */
-    public String display()
+    public String getMfr()
     {
-        if (manuf.length() < 4)
-        {
-            return VIN + "\t" + manuf + "     \t" + color;
-        }
-        return VIN + "\t" + manuf + "    \t" + color;
+        return mfr;
     }
 
     /**
-     * Checks if vehicles are equal to each other.
+     Set the manufacturer of the vehicle.
+     @param name1 Name of the manufacturer to set.
+     */
+    public void setMfr(String name1)
+    {
+        mfr = name1;
+    }
+
+    /**
+     Return the color of the vehicle.
+     */
+    public String getColor()
+    {
+        return color;
+    }
+
+    /**
+     Set the color of the vehicle.
+     @param color1 Color of the vehicle to set.
+     */
+    public void setColor(String color1)
+    {
+        color = color1;
+    }
+
+    /**
+     Return the power of the vehicle.
+     */
+    public powerSource getPower()
+    {
+        return power;
+    }
+
+    /**
+     Set the power of the vehicle.
+     @param power1 Power of the vehicle to set.
+     */
+    public void setPower(powerSource power1)
+    {
+        power = power1;
+    }
+
+    /**
+     Get the VIN
+     */
+    public int getVIN()
+    {
+        return VIN;
+    }
+
+    /**
+     Check if two objects have the same manufacturer, power.
+     @param other The object you want to compare to.
      */
     public boolean equals(Object other)
     {
-        Vehicle otherV = (Vehicle) other;
-        return power == otherV.power && manuf.equals(otherV.manuf) && numWheels == otherV.numWheels;
+        Vehicle otherObject = (Vehicle) other;
+        return mfr.equals(otherObject.mfr) && power == otherObject.power;
     }
 
-    public int getVIN()
+    /**
+     Returns a string containing the manufacturer name and color.
+     */
+    public String display()
     {
-        return this.VIN;
+        return "VIN: " + VIN + " - " + mfr + ", " + color;
     }
 }

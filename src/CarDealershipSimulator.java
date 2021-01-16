@@ -1,272 +1,314 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
+//HASSAAN ABBASI
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class CarDealershipSimulator
 {
-    public static void main(String[] args) throws FileNotFoundException
+    public static void main(String[] args)
     {
-        CarDealership dealership = new CarDealership();
-        ArrayList<Car> newCars = new ArrayList<Car>();
+        // Create a CarDealership object
+        CarDealership simulate = new CarDealership();
 
-        String filename = "Cars.txt";
-        File file = new File(filename);
-        newCars = readFiles(file);
+        // Then create an (initially empty) array list of type Car
+        ArrayList<Car> cars = new ArrayList<Car>();
 
-        SalesTeam salesTeam = new SalesTeam();
-        AccountingSystem accountingSystem = new AccountingSystem();
+        // Then create some new car objects of different types
+        // See the cars file for car object details
+        // Add the car objects to the array list
+        // The ADD command should hand this array list to CarDealership object via the addCars() method
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(">");
+        //Greet the user
+        System.out.println("This is a Car Dealership simulation! Type ADD to begin. Type HELP at anytime for a list of commands.");
+        System.out.println();
 
-        /**
-         * Scans user input and follows the commands of the user.
-         * If  the user input does not match an expected command, it will either show a message or just do nothing and continue.
-         */
-        while (scanner.hasNextLine())
+        try
         {
-            String inputLine = scanner.nextLine();
-            if (inputLine == null || inputLine.equals(""))
+            Scanner scanner = new Scanner(new File("cars.txt"));
+            while(scanner.hasNextLine())
             {
-                System.out.print("\n>");
-                continue;
-            }
+                //Read info from the txt file and initialize variables
+                String mfr = scanner.next();
+                String color = scanner.next();
+                Car.Model model = Car.Model.valueOf(scanner.next());
+                String powerCheck = scanner.next();
+                Vehicle.powerSource power = Vehicle.powerSource.valueOf(powerCheck);
+                double safety = scanner.nextDouble();
+                int maxRange = scanner.nextInt();
+                String awd = scanner.next();
+                double price = scanner.nextInt();
+                String battery = "Lithium-ion";
+                boolean awdCheck = false;
 
-            Scanner commandLine = new Scanner(inputLine);
-            String command = commandLine.next();
+                if(awd.equals("AWD")) {awdCheck = true;}
 
-            if (command == null || command.equals(""))
-            {
-                System.out.print("\n>");
-                continue;
-            }
-            else if (command.equals("L") || command.equals("l"))
-            {
-                dealership.displayInventory();
-            }
-            else if (command.equals("Q") || command.equals("QUIT")|| command.equals("quit")|| command.equals("q"))
-            {
-                scanner.close();
-                commandLine.close();
-                System.exit(0);
-            }
-            else if (command.equals("ADD") || command.equals("add"))
-            {
-                dealership.addCars(newCars);
-            }
-            else if (command.equals("BUY") || command.equals("buy"))
-            {
-                if (commandLine.hasNextInt())
+                if(powerCheck.equals("ELECTRIC_MOTOR"))
                 {
-                    int i = commandLine.nextInt();
+                    int rechargeTime = scanner.nextInt();
+                    cars.add(new ElectricCar(mfr, color, model, power, safety, maxRange, awdCheck, price, battery, rechargeTime));
+                }
+
+                else
+                {
+                    cars.add(new Car(mfr, color, model, power, safety, maxRange, awdCheck, price));
+                }
+            }
+        }
+
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File not found!");
+        }
+
+        // Create a scanner object
+        Scanner in = new Scanner(System.in);
+
+        // while the scanner has another line
+        while(in.hasNextLine())
+        {
+            //    read the input line
+            String line = in.nextLine();
+
+            //    create another scanner object (call it "commandLine" or something) using the input line instead of System.in
+            Scanner commandLine = new Scanner(line);
+
+            //    read the next word from the commandLine scanner
+            if(commandLine.hasNext())
+            {
+                String command = commandLine.next();
+
+                //	check if the word (i.e. string) is equal to one of the commands and if so, call the appropriate method via the CarDealership object
+                if(command.equals("L"))
+                {
+                    System.out.println();
+                    simulate.displayInventory();
+                    System.out.println();
+                }
+
+                else if(command.equals("Q"))
+                {
+                    commandLine.close();
+                    return;
+                }
+
+                else if(command.equals("BUY"))
+                {
+                    System.out.println();
+                    int i = 0;
 
                     try
                     {
-                        System.out.println(dealership.buyCar(i));
-
+                        i = commandLine.nextInt();
+                        String bought = simulate.buyCar(i);
+                        System.out.println(bought);
                     }
-                    catch (NullPointerException e)
+
+                    catch(NullPointerException e)
                     {
-                        System.out.println("Invalid VIN. Please try again.");
-
+                        System.out.println("No car exists at: " + i);
                     }
-                }
-                else
-                {
-                    System.out.println("Which car would you like to buy? (include VIN)");
-                }
-            }
 
-            else if (command.equals("RET")||command.equals("ret"))
-            {
-                if (commandLine.hasNextInt())
-                {
-                    int i = commandLine.nextInt();
+                    catch(InputMismatchException e)
+                    {
+                        System.out.println("BUY must be followed by an INTEGER.");
+                    }
 
+                    catch(IndexOutOfBoundsException e)
+                    {
+                        System.out.println("No car exists with VIN: " + i);
+                    }
+
+                    catch(NoSuchElementException e)
+                    {
+                        System.out.println("BUY must be followed by an INTEGER.");
+                    }
+
+                    System.out.println();
+                }
+
+                else if(command.equals("RET"))
+                {
+                    System.out.println();
+                    int i = 0;
                     try
                     {
-                        System.out.println(dealership.returnCar(i));
-
+                        i = commandLine.nextInt();
+                        simulate.returnCar(i);
                     }
-                    catch (NullPointerException e)
-                    {
-                        System.out.println("Invalid Transaction ID. Please try again.");
 
+                    catch(NullPointerException e)
+                    {
+                        System.out.println("No car exists to return.");
                     }
-                }
-                else
-                {
-                    System.out.println("Which car would you like to return? (include transaction ID)");
-                }
-            }
-            else if (command.equals("SPR")||command.equals("spr"))
-            {
-                dealership.sortByPrice();
-            }
-            else if (command.equals("SSR")||command.equals("ssr"))
-            {
-                dealership.sortBySafetyRating();
-            }
-            else if (command.equals("SMR")||command.equals("smr"))
-            {
-                dealership.sortByMaxRange();
-            }
-            else if (command.equals("FPR")||command.equals("fpr"))
-            {
-                double minPrice = 0;
-                double maxPrice = 99999999;
 
-                if (!commandLine.hasNextDouble())
-                {
-                    System.out.println("Include minimum price and maximum price.");
-                    continue;
-                }
-                minPrice = commandLine.nextDouble();
-                if (!commandLine.hasNextDouble())
-                {
-                    System.out.println("Include minimum price and maximum price.");
-                    continue;
-                }
-                maxPrice = commandLine.nextDouble();
-                if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice)
-                {
-                    System.out.println("Invalid minimum price and maximum price.");
-                    continue;
-                }
-                dealership.filterByPrice(minPrice,maxPrice);
-            }
-            else if (command.equals("FEL")||command.equals("fel"))
-            {
-                dealership.filterByElectric();
-            }
-            else if (command.equals("FAW")||command.equals("faw"))
-            {
-                dealership.filterByAWD();
-            }
-            else if (command.equals("FCL")||command.equals("fcl"))
-            {
-                dealership.filtersClear();
-            }
-            else if (command.equals("SALES")||command.equals("sales"))
-            {
-                if (!commandLine.hasNext())
-                {
-                    accountingSystem.getAllTransactions();
-                    continue;
-                }
-                else if (commandLine.hasNext())
-                {
-                    String next = commandLine.next();
+                    catch(Exception e)
+                    {
+                        System.out.println("This car was already returned.");
+                    }
 
-                    if (next.equals("TEAM")||next.equals("team"))
+                    System.out.println();
+                }
+
+                else if(command.equals("ADD"))
+                {
+                    System.out.println();
+                    simulate.addCars(cars);
+                    System.out.println();
+                }
+
+                else if(command.equals("SPR"))
+                {
+                    System.out.println();
+                    simulate.sortByPrice();
+                    System.out.println();
+                }
+
+                else if(command.equals("SSR"))
+                {
+                    System.out.println();
+                    simulate.sortBySafetyRating();
+                    System.out.println();
+                }
+
+                else if(command.equals("SMR"))
+                {
+                    System.out.println();
+                    simulate.sortByMaxRange();
+                    System.out.println();
+                }
+
+                else if(command.equals("FCL"))
+                {
+                    System.out.println();
+                    simulate.filtersClear();
+                    System.out.println();
+                }
+
+                else if(command.equals("FAW"))
+                {
+                    System.out.println();
+                    simulate.filterByAWD();
+                    System.out.println();
+                }
+
+                else if(command.equals("FEL"))
+                {
+                    System.out.println();
+                    simulate.filterByElectric();
+                    System.out.println();
+                }
+
+                else if(command.equals("FPR"))
+                {
+                    System.out.println();
+                    if(commandLine.hasNextDouble())
                     {
-                        salesTeam.displayTeam();
-                        continue;
-                    }
-                    else if (next.equals("TOPSP")||next.equals("topsp"))
-                    {
-                        accountingSystem.topSalesPerson();
-                        continue;
-                    }
-                    else if (next.equals("STATS")||next.equals("stats"))
-                    {
-                        accountingSystem.stats();
-                        continue;
+                        double min = commandLine.nextDouble();
+                        if(commandLine.hasNextDouble())
+                        {
+                            double max = commandLine.nextDouble();
+                            simulate.filterByPrice(min, max);
+                            System.out.println();
+                        }
                     }
                     else
                     {
-                        try
+                        System.out.println("FPR must be followed by TWO DOUBLES, where the first double is smaller than the second.");
+                        System.out.println();
+                    }
+                }
+
+                else if(command.equals("HELP"))
+                {
+                    System.out.println();
+                    System.out.println("L - Lists the cars in the dealership.");
+                    System.out.println("Q - Quit the program.");
+                    System.out.println("BUY [integer] - Buy a car in the dealership with a matching VIN integer.");
+                    System.out.println("RET [integer] - Return the car that with an ID number as the integer.");
+                    System.out.println("ADD - Add cars to the dealership.");
+                    System.out.println("SPR - Sort the cars in the list from lowest price to highest price.");
+                    System.out.println("SSR - Sort the cars in the list from lowest safety rating to highest safety rating.");
+                    System.out.println("SMR - Sort the cars in the list from lowest max range to highest max range.");
+                    System.out.println("FCL - Clear all filters applied.");
+                    System.out.println("FAW - Filter the list by cars with all-wheel-drive.");
+                    System.out.println("FEL - Filter the list by cars that are electric powered.");
+                    System.out.println("FPR [integer1] [integer2] - Filter the list by cars whose price is between integer1 and integer2.");
+                    System.out.println("SALES - Return a list of all transactions.");
+                    System.out.println("SALES TEAM - Returns the current sales team.");
+                    System.out.println("SALES TOPSP - Returns the sales person( or people if there is a tie) with the most sales.");
+                    System.out.println("SALES STATS - Returns the sales statistics.");
+                    System.out.println("SALES [integer] - Returns the sales made in the month represented by the integer.");
+                    System.out.println();
+                }
+
+                else if(command.equals("SALES"))
+                {
+                    if(commandLine.hasNextInt())
+                    {
+                        System.out.println();
+                        int afterInt = commandLine.nextInt();
+                        simulate.aSys.getTransactionListM(afterInt);
+                        System.out.println();
+                    }
+
+                    else if(commandLine.hasNext())
+                    {
+                        String after = commandLine.next();
+
+                        if(after.equals("TEAM"))
                         {
-                            int month = Integer.parseInt(next);
-                            if (month >= 0 && month < 12)
-                            {
-                                accountingSystem.salesM(month);
-                            }
-                        } catch (NumberFormatException ex)
+                            System.out.println();
+                            System.out.println(simulate.sTeam.teamCombine());
+                            System.out.println();
+                        }
+
+                        else if(after.equals("TOPSP"))
                         {
-                            System.out.println("Invalid input. Please try again.");
-                            continue;
+                            System.out.println();
+                            System.out.println(simulate.aSys.topSalesPerson());
+                            System.out.println();
+                        }
+
+                        else if(after.equals("STATS"))
+                        {
+                            System.out.println();
+                            simulate.aSys.getStats();
+                            System.out.println();
+                        }
+
+                        else
+                        {
+                            System.out.println();
+                            System.out.println("SALES must be followed by a keyword. Type HELP to see the keywords that SALES may be followed by.");
+                            System.out.println();
                         }
                     }
+
+                    else if(!commandLine.hasNext())
+                    {
+                        System.out.println();
+                        simulate.aSys.getTransactionList();
+                        System.out.println();
+                    }
                 }
+
+
                 else
                 {
-                    continue;
+                    System.out.println();
+                    System.out.println("Enter a valid command. Type HELP for commands.");
+                    System.out.println();
                 }
             }
-            System.out.print("\n>");
-        }
-    }
-
-    /**
-     * Reads from the written text file, assigns values to the variables, and creates car objects accordingly.
-     * Puts the car objects inside an ArrayList.
-     * Displays a message if there is no text file or if it can't find the text file.
-     */
-    public static ArrayList<Car> readFiles(File Cars)
-    {
-        try{
-            ArrayList<Car> newCars = new ArrayList<Car>();
-            Scanner scanner = new Scanner(Cars);
-            while (scanner.hasNextLine())
+            else
             {
-                String line = scanner.nextLine();
-                Scanner linescanner = new Scanner(line);
-
-                String manuf = null;				//1
-                String color = null;				//2
-                Car.Model model = null;				//3
-                Vehicle.PowerSource power = null;	//4
-                double safety = 0;					//5
-                int range = 0;						//6
-                boolean awd = true;					//7
-                double price = 0;					//8
-                int counter = 1;
-                while (linescanner.hasNext())
-                {
-                    switch (counter)
-                    {
-                        case 1:	manuf = linescanner.next(); break;
-                        case 2:	color = linescanner.next(); break;
-                        case 3:	String mod = linescanner.next();
-                            if (mod.equals("SEDAN"))
-                            {
-                                model = Car.Model.SEDAN;
-                            }else if(mod.equals("SPORTS"))
-                            {
-                                model = Car.Model.SPORTS;
-                            }else if(mod.equals("MINIVAN"))
-                            {
-                                model = Car.Model.MINIVAN;
-                            }
-                            break;
-                        case 4:	String pow = linescanner.next();
-                            if (pow.equals("GAS_ENGINE"))
-                            {
-                                power = Vehicle.PowerSource.GAS_ENGINE;
-                            }else if (pow.equals("GAS_ENGINE"))
-                            {
-                                power = Vehicle.PowerSource.ELECTRIC_MOTOR;
-                            }
-                            break;
-                        case 5:	safety = Double.parseDouble(linescanner.next()); break;
-                        case 6:	range = Integer.parseInt(linescanner.next()); break;
-                        case 7:	if (linescanner.next() == "AWD") {awd = true;} break;
-                        case 8:	price = Double.parseDouble(linescanner.next()); break;
-                    }
-                    counter++;
-                }
-                Car car = new Car(manuf, color, model, power, safety, range, awd, price);
-                newCars.add(car);
-                linescanner.close();
+                System.out.println();
+                System.out.println("Enter a valid command. Type HELP for commands.");
+                System.out.println();
             }
-            scanner.close();
-            return newCars;
-        }
-        catch (FileNotFoundException exception){
-            System.out.println("No car file found.");
-            return null;
         }
     }
 }
