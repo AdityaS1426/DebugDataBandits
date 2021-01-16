@@ -22,6 +22,18 @@ Below is the link to our Google Document containing our Project Plan. Project Pl
 
 Click on "Projects" to view our Scrum Board.
 
+## How to Run CarDealershipSimulator
+- Open IntelliJ.
+- Click "Get From Version Control".
+- On our GitHub Repository, click on the green "Code" button.
+- Copy the link that appears.
+- Paste it into the URL box in IntelliJ.
+- Expand the SRC folder.
+- Double-click on the "CarDealershipSimulator" Class. This is the Main Class of the program.
+- Click on the first green arrow to the left of the code.
+- Click "Run".
+- IMPORTANT: Make sure to type "ADD" in order to add the cars from the TXT file to the program. If this is not done, the other commands won't work.
+- The other commands are listed in the README.
 ## Commands for Car Dealership
 
 NOTE: Type "ADD" first so that the cars can be added to the inventory.
