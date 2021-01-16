@@ -39,13 +39,13 @@ public class AccountingSystem
         monthSalesMap.put(10, 0);
         monthSalesMap.put(11, 0);
 
-        personSalesMap.put("Matthew", 0);
-        personSalesMap.put("Jeffrey", 0);
-        personSalesMap.put("James", 0);
-        personSalesMap.put("Brian", 0);
-        personSalesMap.put("Hailey", 0);
-        personSalesMap.put("Amanda", 0);
-        personSalesMap.put("Samantha", 0);
+        personSalesMap.put("Kingly", 0);
+        personSalesMap.put("Danny", 0);
+        personSalesMap.put("Ken", 0);
+        personSalesMap.put("Vanessa", 0);
+        personSalesMap.put("Jimmy", 0);
+        personSalesMap.put("Anthony", 0);
+        personSalesMap.put("Alex", 0);
 
         totalSales = 0;
         totalSold = 0;

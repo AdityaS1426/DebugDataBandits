@@ -87,7 +87,7 @@ public class CarDealership
     public void displayInventory()
     {
         System.out.println("VIN\tMANUFACTURER\tCOLOR\tMODEL\tPRICE\t\tSAFETY\tRANGE");
-        System.out.println("\t\t\t\t\t\t\tRATING");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\tRATING");
 
         for (int i = 0; i < cars.size(); i++)
         {

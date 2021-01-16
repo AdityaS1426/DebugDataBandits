@@ -11,13 +11,13 @@ public class SalesTeam
     public SalesTeam()
     {
         team = new LinkedList<String>();
-        team.add("Matthew");
-        team.add("Jeffrey");
-        team.add("James");
-        team.add("Brian");
-        team.add("Hailey");
-        team.add("Amanda");
-        team.add("Samantha");
+        team.add("Kingly");
+        team.add("Danny");
+        team.add("Ken");
+        team.add("Vanessa");
+        team.add("Jimmy");
+        team.add("Anthony");
+        team.add("Alex");
 
     }
 

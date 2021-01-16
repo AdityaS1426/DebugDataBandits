@@ -34,7 +34,7 @@ L - List the cars.
 
 SALES - List the yearly sales.
 
-TEAM - List the sales team.
+SALES TEAM - List the sales team.
 
 TOPSP - List the top sales person.
 
