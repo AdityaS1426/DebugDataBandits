@@ -32,7 +32,9 @@ Click on "Projects" to view our Scrum Board.
 ## References & Links
 
 - [Link to CarDealershipSimulator - Aditya & Arnav Worked as a Pair on This Code](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/tree/main/src)
-- To find Aditya's Scrum Card, go to the Scrum Board by clicking "Projects", & look in the "In Progress" column.[Provided link for evidence of work](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/tree/bank-init/.idea)
+- To find Aditya's Scrum Card, go to the Scrum Board by clicking "Projects", & look in the "In Progress" column.
+- [Provided link for evidence of work](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/tree/bank-init/.idea)
+
 ## How to Run CarDealershipSimulator - Aditya & Arnav
 - Open IntelliJ.
 - Click "Get From Version Control".
@@ -46,9 +48,13 @@ Click on "Projects" to view our Scrum Board.
 - IMPORTANT: Make sure to type "ADD" in order to add the cars from the TXT file to the program. If this is not done, the other commands won't work.
 - ALSO IMPORTANT: When sorting or filtering a car, enter the command, & then press "L" to load the car list again. This list will display the appropriate sort or filter.
 - The other commands are listed in the README.
+
 ## Commands for Car Dealership
 
-NOTE: Type "ADD" first so that the cars can be added to the inventory.
+FIRST NOTE: Type "ADD" first so that the cars can be added to the inventory.
+SECOND NOTE: All of the commands must be typed in CAPITAL LETTERS.
+SECOND NOTE: If you don't want to look at the README for the commands, simply type "HELP" so that the commands are visible in the "Run" box.
+THIRD NOTE: After sorting or filtering, type "L" to list the cars so that the sorted/filtered list can be seen.
 
 ###### Basic Use
 
@@ -60,9 +66,9 @@ SALES - List the yearly sales.
 
 SALES TEAM - List the sales team.
 
-TOPSP - List the top sales person.
+SALES TOPSP - List the top sales person.
 
-STATS - List the sales statistics.
+SALES STATS - List the sales statistics.
 
 Q - Quit the program.
 
@@ -76,7 +82,7 @@ SMR - Sort by the maximum range.
 
 ###### Filtering
 
-FPR - Filter by the price.
+FPR [Enter Min Price] [Enter Max Price] - Filter by the price.
 
 FEL - Filter the electric vehicles.
 
@@ -86,9 +92,9 @@ FCL - Clear the filters.
 
 ###### Transactions
 
-BUY - Buy a car.
+BUY [Enter VIN] - Buy a car.
 
-RET - Return a car.
+RET [Enter Transaction ID] - Return a car.
 
 ## How to Use the Bank - Atharva & Jacob
 
