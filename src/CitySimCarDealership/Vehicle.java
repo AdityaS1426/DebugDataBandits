@@ -1,3 +1,5 @@
+package CitySimCarDealership;
+
 /**
  Vehicle -- This will be the basic blueprint for a vehicle object. From
  this, we will form more detailed vehicles such as electric cars.
