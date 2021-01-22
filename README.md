@@ -18,7 +18,7 @@ Below is the link to our Google Document containing our Project Plan. Project Pl
 
 ## Scrum Board
 
-Click on "Projects" to view our Scrum Board.
+Click on [Projects](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/projects/1) to view our Scrum Board.
 
 
 ## How to Run CarDealershipSimulator - Aditya & Arnav
