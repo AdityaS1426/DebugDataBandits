@@ -1,5 +1,7 @@
 # DebugDataBandits - City Simulation
 
+COMMIT DEMONSTRATION
+
 Group Members - Atharva Kudrimoti, Jacob Rozenkrants, Aditya Surapaneni, Arnav Swami
 
 ## 5 Hour Challenge Self-Assessments
