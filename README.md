@@ -2,15 +2,13 @@
 
 Group Members - Atharva Kudrimoti, Jacob Rozenkrants, Aditya Surapaneni, Arnav Swami
 
-## 5 Hour Challenge Self-Assessments
-
-Below is the link to our 5 Hour Coding Challenge Self-Assessments.
-
-[5 Hour Coding Challenge Self-Assessments](https://docs.google.com/document/d/1t3HyMfHYAdfMq5ExskkMa_yAuScE9bmNFl6bsYqzwdY/edit?usp=sharing)
-
 ## Summary
 
 The purpose of our project is to utilize Events, Inheritance, & Databases in order to create a “city infrastructure”. This “city infrastructure” will include essential elements that individuals in a city would encounter on a daily basis, such as using a bank’s services, utilizing a calendar/scheduler to plan the day, implementing an attendance/grading system in a school, visiting a car dealership, etc. Our end goal is to have the user of our overall program be able to access these various utilities that entail the city so they can simulate the typical life in a city.
+
+## References & Links
+
+- Consult the [Issues](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/issues) in order to find detailed code references. They're organized by Class.
 
 ## Project Plan
 
@@ -28,10 +26,6 @@ Click on "Projects" to view our Scrum Board.
 - Aditya & Arnav will aim to finish CarDealershipSimulator.
 - Atharva & Jacob will aim to finish BankingSystem.
 - Atharva & Jacob will start on SchoolAttendanceSystem.
-
-## References & Links
-
-- Consult the [Issues](https://github.com/AdityaS1426/DebugDataBandits-CitySimulation/issues) in order to find detailed code references. They're organized by Class.
 
 ## How to Run CarDealershipSimulator - Aditya & Arnav
 - Open IntelliJ.
@@ -133,3 +127,10 @@ These programs are primarily based on user input.
 - If the student attended the class, enter "1".
 - If the student was absent, enter "0". 
 - The total number for five days will result in different outputs. (Ex. You have 1 or more absences.)
+
+## 5 Hour Challenge Self-Assessments
+
+Below is the link to our 5 Hour Coding Challenge Self-Assessments.
+
+[5 Hour Coding Challenge Self-Assessments](https://docs.google.com/document/d/1t3HyMfHYAdfMq5ExskkMa_yAuScE9bmNFl6bsYqzwdY/edit?usp=sharing)
+
