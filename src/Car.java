@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-public class Car {
-
-    public java.lang.String getVIN() {
-        return null;
-    }
-}
-=======
 /**
  Car -- This will be a type of vehicle.
  */
@@ -162,4 +154,3 @@ public class Car extends Vehicle implements Comparable<Car>
         else {return 0;}
     }
 }
->>>>>>> main

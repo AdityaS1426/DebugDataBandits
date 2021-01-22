@@ -18,7 +18,7 @@ public class CarDealershipSimulator
         // Then creates some new car objects of different types.
         // See the cars file for car object details.
         // Add the car objects to the array list.
-        // The ADD command should hand this array list to CarDealership object via the addCars() method.
+        // The ADD command should hand this array list to CarDealership object via the addCars() method.1
 
         //Greet the user.
         System.out.println("This is a Car Dealership simulation! Type ADD to begin. Type HELP at anytime for a list of commands.");
