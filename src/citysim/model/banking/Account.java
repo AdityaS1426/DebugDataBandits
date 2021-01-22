@@ -36,5 +36,5 @@ public class Account {
     public double getBalance() {
         return this.amount;
     }
-    //Must write method that comes up with new names when initializing new accounts
+
 }
