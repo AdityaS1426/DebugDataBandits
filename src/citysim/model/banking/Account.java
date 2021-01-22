@@ -1,3 +1,4 @@
+
 package citysim.model.banking;
 
 import java.util.*;
@@ -36,5 +37,4 @@ public class Account {
     public double getBalance() {
         return this.amount;
     }
-
 }
