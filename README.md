@@ -20,12 +20,6 @@ Below is the link to our Google Document containing our Project Plan. Project Pl
 
 Click on "Projects" to view our Scrum Board.
 
-## Scrum Team Goals for Week of Scrum Team Cards/Ticket Focus
-
-- Aditya & Arnav will simplify the CarDealershipSimulator code, fix errors, & fix user commands that are not working.
-- Aditya & Arnav will aim to finish CarDealershipSimulator.
-- Atharva & Jacob will aim to finish BankingSystem.
-- Atharva & Jacob will start on SchoolAttendanceSystem.
 
 ## How to Run CarDealershipSimulator - Aditya & Arnav
 - Open IntelliJ.
@@ -133,4 +127,11 @@ These programs are primarily based on user input.
 Below is the link to our 5 Hour Coding Challenge Self-Assessments.
 
 [5 Hour Coding Challenge Self-Assessments](https://docs.google.com/document/d/1t3HyMfHYAdfMq5ExskkMa_yAuScE9bmNFl6bsYqzwdY/edit?usp=sharing)
+
+## Scrum Team Goals for Week of Scrum Team Cards/Ticket Focus
+
+- Aditya & Arnav will simplify the CarDealershipSimulator code, fix errors, & fix user commands that are not working.
+- Aditya & Arnav will aim to finish CarDealershipSimulator.
+- Atharva & Jacob will aim to finish BankingSystem.
+- Atharva & Jacob will start on SchoolAttendanceSystem.
 
