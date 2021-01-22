@@ -1,291 +1,313 @@
-import java.util.*;
-//This class is for the AccountingSystem, which contains all elements of an AccountingSystem.
-public class AccountingSystem {
-    // Instance Variables
-    private SalesTeam team;
-    private int transid;
-    private int lastid;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+/**
+ Works with Transaction objects to simulate an accounting system.
+ */
+public class AccountingSystem
+{
+    //Instance Variable
     private Map<Integer, Transaction> transactions;
-    private Set<Integer> keySet;
-    private Iterator<Integer>  iterator;
 
-
-    // Constructor Method
-    public AccountingSystem(){
-        team = new SalesTeam();
-        transactions = new TreeMap<Integer, Transaction>();
-        keySet = transactions.keySet();
-        iterator = keySet.iterator();
+    /**
+     A constructor method to have transactions refer to an empty
+     array list.
+     */
+    public AccountingSystem()
+    {
+        transactions = new HashMap<Integer, Transaction>();
     }
 
-
-    public String add(GregorianCalendar date, Car car, String salesPerson, String type, double salePrice){
-        transid = (int)(Math.random()*(500))+100;
-        lastid = transid;
-        Transaction transaction = new Transaction(transid,date,car,salesPerson,type,salePrice);
-        transactions.put(transid,transaction);
-        return transaction.display();
+    /**
+     Adds transaction to hash map.
+     @param date Date of transaction.
+     @param car Car being bought or returned.
+     @param salesPerson Name of the sales person.
+     @param type Type of transaction. (BUY or RETURN)
+     @param salePrice Price the car was sold for.
+     */
+    public String add(Calendar date, Car car, String salesPerson, String type, double salePrice)
+    {
+        int id = (int) (Math.random() * 100);
+        Transaction tran = new Transaction(id, (GregorianCalendar) date, car, salesPerson, type, salePrice);
+        transactions.put(id, tran);
+        return tran.display();
     }
 
-    // Finds transaction by ID.
-    public Transaction getTransaction(int id1){
-        iterator = keySet.iterator();
-        while(iterator.hasNext()){
-            int id = iterator.next();
-            if (id1 == id){
-                Transaction transaction = transactions.get(id);
-                return transaction;
-            }
+    /**
+     Finds a transaction based on transaction ID.
+     @param id The ID of the car to retrieve.
+     */
+    public Transaction getTransaction(int id)
+    {
+        for(Integer trID : transactions.keySet())
+        {
+            if(trID == id) {return transactions.get(trID);}
         }
         return null;
     }
 
-    // Shows all transactions.
-    public String displayAllTransactions(){
-        String result = "";
-        iterator = keySet.iterator();
-        if(transactions.size() > 0){
-            while(iterator.hasNext()){
-                int id = iterator.next();
-                Transaction transaction = transactions.get(id);
-                result += transaction.display() + "\n";
-            }
-        }else{
-            throw new IllegalArgumentException("There Are No Transactions!");
+    /**
+     Returns the whole list of transactions that occurred.
+     */
+    public void getTransactionList()
+    {
+        for(Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getDate().get(Calendar.YEAR) == 2019) {System.out.println(transactions.get(trID).display());}
         }
-        return result;
     }
 
-    // Shows all transactions for the month.
-    public String displayMonthTransactions(int month){
-        String result = "";
-        iterator = keySet.iterator();
-        if(transactions.size() > 0){
-            while(iterator.hasNext()){
-                int id = iterator.next();
-                Transaction transaction = transactions.get(id);
-                if (month == transaction.getDate().get(Calendar.MONTH)){
-                    result += transaction.display() + "\n";
-                }
-            }
-        }else{
-            throw new IllegalArgumentException("There Are No Transactions");
+    /**
+     Returns the top sales person.
+     */
+    public String topSalesPerson()
+    {
+        SalesTeam teamObj = new SalesTeam();
+        Map<String, Integer> salesPeopleSells = new TreeMap<String,Integer>();
+        Set<String> keys = salesPeopleSells.keySet();
+        String topSP =""; //Top sales person.
+        String topSPTie = ""; //Top sales person String for tied sales.
+        int top = 0; //Number for top sales.
+
+        //Mapping the sales team members to initial sales of 0.
+        for(int i = 0; i < teamObj.salesTeamSize(); i++)
+        {
+            salesPeopleSells.put(teamObj.returnIPerson(i), 0);
         }
-        return result;
-    }
 
-    // Calculates the total of all transactions.
-    public double getTotalSales(){
-        double total = 0.0;
-        iterator = keySet.iterator();
-        if(transactions.size() > 0){
-            while(iterator.hasNext()){
-                int id = iterator.next();
-                total += transactions.get(id).getPrice();
-            }
-        }else{
-            throw new IllegalArgumentException("There Are No Transactions!");
-        }
-        return total;
-    }
-
-    // Gets average sales.
-    public double getAverageSalesPerMonth(){
-        return getTotalSales()/12;
-    }
-
-    // Finds the number of vehicle returns.
-    public int getTotalCarReturns(){
-        int total = 0;
-        iterator = keySet.iterator();
-        if(transactions.size() > 0){
-            while(iterator.hasNext()){
-                int id = iterator.next();
-                if (transactions.get(id).getType().equals("RET")){
-                    total += 1;
-                }
-            }
-        }else{
-            throw new IllegalArgumentException("There Are No Transactions!");
-        }
-        return total;
-    }
-
-    // Find the total car sales with returns. (If the car is bought but returned, it doesn't count as a sale.
-    public int getTotalCarsSold(){
-        int total = 0;
-        iterator = keySet.iterator();
-        if(transactions.size() > 0){
-            while(iterator.hasNext()){
-                int id = iterator.next();
-                if (transactions.get(id).getType().equals("BUY")){
-                    total += 1;
-                }
-            }
-        }else{
-            throw new IllegalArgumentException("There Are No Transactions!");
-        }
-        return total;
-    }
-
-    // Finds the month with the most amount of cars sold.
-    public String getHighestSalesMonth(){
-        String text = "";
-
-        ArrayList<Integer> monthsales = new ArrayList<Integer>();
-        String[] months = {"January", "February", "March","April","May","June","July","August","September","October","November","December"};
-
-        if(transactions.size() > 0){
-            for(int i = 0; i < 12; i++){
-                iterator = keySet.iterator();
-                int monthCount = 0;
-                while(iterator.hasNext()){
-                    int id = iterator.next();
-                    if(transactions.get(id).getDate().get(Calendar.MONTH) == i){
-                        if (transactions.get(id).getType().equals("BUY")){
-                            monthCount += 1;
-                        }
-                        if (transactions.get(id).getType().equals("RET")){
-                            monthCount -= 1;
-                        }
-                    }
-                }
-                monthsales.add(monthCount);
+        //Updating the sales for every team member based on BUY and RETURN.
+        for(Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getType().equals("BUY"))
+            {
+                String person = transactions.get(trID).getSalesPerson();
+                int sales = salesPeopleSells.get(person) + 1;
+                salesPeopleSells.put(person, sales);
             }
 
-            // Get the max value in  the ArrayList.
-            int max = 0;
-            max = Collections.max(monthsales);
-            // Get the month which has the highest sales, but if it's a tie, return the latest month with that tie.
-            for(int i = 0; i < monthsales.size(); i++){
-                if (monthsales.get(i) == max){
-                    text += "\n" + months[i] + ": " + max + " car(s)";
-                }
-            }
-
-        }else{
-            throw new IllegalArgumentException("There Are No Transactions!");
-        }
-        return text;
-    }
-
-    // Find the number of transactions in the month.
-    public int getNumTransactionsOfMonth(int month){
-        int counter = 0;
-        iterator = keySet.iterator();
-        while(iterator.hasNext()){
-            int id = iterator.next();
-            if (month == transactions.get(id).getDate().get(Calendar.MONTH)){
-                if (transactions.get(id).getType().equals("BUY")){
-                    counter += 1;
-                }
-                if (transactions.get(id).getType().equals("RET")){
-                    counter -= 1;
-                }
+            else if(transactions.get(trID).getType().equals("RETURN"))
+            {
+                String person = transactions.get(trID).getSalesPerson();
+                int sales = salesPeopleSells.get(person) - 1;
+                salesPeopleSells.put(person, sales);
             }
         }
-        return counter;
-    }
 
-    // Finds the most successful salesmen; there are multiple, but it prints all of them.
-    public String getTopSalesPerson(){
-        String text = "";
-        ArrayList<Integer> numSales = new ArrayList<Integer>();
-        if(transactions.size() > 0){
-            for(int i = 0; i < team.getSalesPeople().size(); i++){
-                int value = 0;
-                iterator = keySet.iterator();
-                while(iterator.hasNext()){
-                    int id = iterator.next();
-                    String person = transactions.get(id).getSalesPerson();
-                    if(person.equals(team.findSalesPerson(i)) && transactions.get(id).getType().equals("BUY")){
-                        value ++;
-                    }
-
-                }
-                numSales.add(value);
+        //Finding the top sales person.
+        for(String key : keys)
+        {
+            if(salesPeopleSells.get(key) > top)
+            {
+                topSP = key;
+                top = salesPeopleSells.get(key);
             }
 
-            // Get max value in ArrayList.
-            int max = 0;
-            for(int i = 0; i < numSales.size(); i++){
-                if (numSales.get(i) > max){
-                    max = numSales.get(i);
-                }
-            }
-
-            // Adds all salesmen & the number of cars sold as a String if the number of cars sold is a tie.
-            for(int i = 0; i < numSales.size(); i++){
-                if (numSales.get(i) == max){
-                    text += "\nName: " + team.findSalesPerson(i) + "\nNum Cars Sold: " + max;
-                }
-            }
-        }else{
-            throw new IllegalArgumentException("There Are No Transactions!");
         }
-        return text;
+
+        //Finding another top sales person if there's a tie.
+        for(String key : keys)
+        {
+            if(salesPeopleSells.get(key) == top && !key.equals(topSP))
+            {
+                topSPTie = topSPTie + " " + key;
+            }
+        }
+
+        if(top == 0) {return "No top sales person currently.";}
+        else if(!topSPTie.equals("")) {return "Team members with the most sales (" + top + " sales): " + topSPTie + " " + topSP;}
+        else {return "Top Sales Person: " + topSP + " with " + top + " sales!";}
     }
 
-    public SalesTeam getTeam() {
-        return team;
+    /**
+     Returns the transactions that occurred in a given month.
+     @param i The month number.
+     */
+    public void getTransactionListM(int i)
+    {
+        for(Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getDate().get(Calendar.MONTH) == i) {System.out.println(transactions.get(trID).display());}
+        }
     }
 
-    public void setTeam(SalesTeam team) {
-        this.team = team;
-    }
+    /**
+     Returns the statistics of transactions in a year.
+     */
+    public void getStats()
+    {
+        int totalSales = 0; //Total number of sales.
+        int averageSales = 0; //Average sales.
+        int carsSold = 0; //Number of cars sold.
+        int highestSalesMNum = 0; //Highest sales month in number format.
+        int mostSales = 0; //The highest number of sales.
+        String highestSalesM = ""; //Highest sales month in String format.
+        String highestSalesMTie = ""; //Highest sales month string in case there's a tie.
+        int carsRet = 0; //Number of cars returned.
 
-    // Return the ID.
-    public int getId() {
-        return transid;
-    }
+        //Total sales function.
+        for (Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getType().equals("BUY"))
+            {
+                totalSales += transactions.get(trID).getSalePrice();
+            }
+            else
+            {
+                totalSales -= transactions.get(trID).getSalePrice();
+            }
+        }
 
-    // The ID is to be set.
-    public void setId(int id) {
-        this.transid = id;
-    }
+        //Average sales function.
+        averageSales = totalSales / 12;
 
-    // The transactions are to be set.
-    public void setTransactions(Map<Integer, Transaction> transactions) {
-        this.transactions = transactions;
-    }
+        //Cars sold/returned function.
+        for (Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getType().equals("BUY"))
+            {
+                carsSold++;
+            }
+            else
+            {
+                carsSold--;
+                carsRet++;
+            }
+        }
 
-    public Set<Integer> getKeySet() {
-        return keySet;
-    }
+        //Highest sales month function.
+        Map<Integer, Integer> highestM = new TreeMap<Integer,Integer>(); //Mapping month number to sales.
+        Set<Integer> keys = highestM.keySet();
+        //SimpleDateFormat sdf = new SimpleDateFormat("MMM");
 
-    public void setKeySet(Set<Integer> keySet) {
-        this.keySet = keySet;
-    }
+        for(Integer trID : transactions.keySet())
+        {
+            highestM.put(transactions.get(trID).getDate().get(Calendar.MONTH), 0);
+        }
 
-    // Return the interator.
-    public Iterator<Integer> getIterator() {
-        return iterator;
-    }
+        for(Integer trID : transactions.keySet())
+        {
+            if(transactions.get(trID).getType().equals("BUY"))
+            {
+                int sales = highestM.get(transactions.get(trID).getDate().get(Calendar.MONTH)) + 1;
+                highestM.put(transactions.get(trID).getDate().get(Calendar.MONTH), sales);
+            }
 
-    public void setIterator(Iterator<Integer> iterator) {
-        this.iterator = iterator;
-    }
+            else if(transactions.get(trID).getType().equals("RETURN"))
+            {
+                int sales = highestM.get(transactions.get(trID).getDate().get(Calendar.MONTH)) - 1;
+                highestM.put(transactions.get(trID).getDate().get(Calendar.MONTH), sales);
+            }
+        }
 
-    // Return the transactions.
-    public Map<Integer, Transaction> getTransactions() {
-        return transactions;
-    }
+        for(Integer key : keys)
+        {
+            if(highestM.get(key) > mostSales)
+            {
+                mostSales = highestM.get(key);
+                highestSalesMNum = key;
+            }
 
-    // Return the ID.
-    public int getTransid() {
-        return transid;
-    }
+        }
 
-    public void setTransid(int transid) {
-        this.transid = transid;
-    }
+        for(Integer month : keys)
+        {
+            if(highestM.get(month) == mostSales)
+            {
+                switch(month)
+                {
+                    case 0:
+                        highestSalesMTie += " Jan ";
+                        break;
+                    case 1:
+                        highestSalesMTie += " Feb ";
+                        break;
+                    case 2:
+                        highestSalesMTie += " Mar ";
+                        break;
+                    case 3:
+                        highestSalesMTie += " Apr ";
+                        break;
+                    case 4:
+                        highestSalesMTie += " May ";
+                        break;
+                    case 5:
+                        highestSalesMTie += " Jun ";
+                        break;
+                    case 6:
+                        highestSalesM += " Jul ";
+                        break;
+                    case 7:
+                        highestSalesMTie += " Aug ";
+                        break;
+                    case 8:
+                        highestSalesMTie += " Sep ";
+                        break;
+                    case 9:
+                        highestSalesMTie += " Oct ";
+                        break;
+                    case 10:
+                        highestSalesMTie += " Nov ";
+                        break;
+                    case 11:
+                        highestSalesMTie += " Dec ";
+                        break;
+                }
+            }
 
-    public int getLastid() {
-        return lastid;
-    }
+        }
 
-    public void setLastid(int lastid) {
-        this.lastid = lastid;
+        switch(highestSalesMNum)
+        {
+            case 0:
+                if(totalSales == 0)
+                {
+                    highestSalesM = "No highest sales month.";
+                    break;
+                }
+                highestSalesM = "Jan";
+                break;
+            case 1:
+                highestSalesM = "Feb";
+                break;
+            case 2:
+                highestSalesM = "Mar";
+                break;
+            case 3:
+                highestSalesM = "Apr";
+                break;
+            case 4:
+                highestSalesM = "May";
+                break;
+            case 5:
+                highestSalesM = "Jun";
+                break;
+            case 6:
+                highestSalesM = "Jul";
+                break;
+            case 7:
+                highestSalesM = "Aug";
+                break;
+            case 8:
+                highestSalesM = "Sep";
+                break;
+            case 9:
+                highestSalesM = "Oct";
+                break;
+            case 10:
+                highestSalesM = "Nov";
+                break;
+            case 11:
+                highestSalesM = "Dec";
+                break;
+        }
+
+        if(mostSales == 0 || carsSold == 0) {System.out.println("Total Sales: " + totalSales + " - Average Sales: " + averageSales + " - Cars Sold: " + carsSold + " - There is no highest sales month - " + "Cars Returned: " + carsRet);}
+        else  {System.out.println("Total Sales: " + totalSales + " - Average Sales: " + averageSales + " - Cars Sold: " + carsSold + " - Highest Sales Month(s): " + highestSalesMTie + " - Cars Returned: " + carsRet);}
     }
 }
-
