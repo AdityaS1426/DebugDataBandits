@@ -1,15 +1,15 @@
-package citysim.tests.banking;
+package CitySimBankingSystem.TestBanking;
 import java.util.*;
 
 // importing views
-import citysim.view.menus.banking.AccountMenu;
-import citysim.view.menus.banking.BankMenuOption;
-import citysim.view.menus.banking.AccountMenuOption;
-import citysim.view.menus.banking.BankMenu;
+import CitySimBankingSystem.ViewMenus.Banking.AccountMenu;
+import CitySimBankingSystem.ViewMenus.Banking.BankMenuOption;
+import CitySimBankingSystem.ViewMenus.Banking.AccountMenuOption;
+import CitySimBankingSystem.ViewMenus.Banking.BankMenu;
 
 // importing models
-import citysim.model.banking.Bank;
-import citysim.model.banking.Account;
+import CitySimBankingSystem.Model.Banking.Bank;
+import CitySimBankingSystem.Model.Banking.Account;
 
 public class BankTests {
     private Bank bank;

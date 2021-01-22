@@ -1,4 +1,4 @@
-package citysim.view.menus;
+package CitySimBankingSystem.ViewMenus;
 
 import java.util.Scanner;
 

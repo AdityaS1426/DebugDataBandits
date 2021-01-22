@@ -1,6 +1,6 @@
-package citysim.view.menus.banking;
+package CitySimBankingSystem.ViewMenus.Banking;
 
-import citysim.view.menus.Menu;
+import CitySimBankingSystem.ViewMenus.Menu;
 
 public class AccountMenu extends Menu {
 

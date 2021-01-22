@@ -1,7 +1,5 @@
 
-package citysim.model.banking;
-
-import java.util.*;
+package CitySimBankingSystem.Model.Banking;
 
 public class Account {
     private double amount = 0;

@@ -1,4 +1,4 @@
-package citysim.view.menus.banking;
+package CitySimBankingSystem.ViewMenus.Banking;
 
 public enum AccountMenuOption {
     None,

@@ -1,6 +1,6 @@
-package citysim;
+package CitySimBankingSystem;
 
-import citysim.tests.banking.BankTests;
+import CitySimBankingSystem.TestBanking.BankTests;
 
 public class Main {
     public static void main(String[] args){
