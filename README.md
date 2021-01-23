@@ -120,8 +120,8 @@ These programs are primarily based on user input.
 - This will be printed on the screen.
 
 ###### Attendance System
-- If the student attended the class, enter "1".
-- If the student was absent, enter "0". 
+- If the student was present for the class, enter "1".
+- If the student was absent for the class, enter "0". 
 - The total number for five days will result in different outputs. (Ex. You have 1 or more absences.)
 
 ## 5 Hour Challenge Self-Assessments
