@@ -1,3 +1,5 @@
+package CitySimCarDealership;
+
 /**
  ElectricCar -- This will be a type of car.
  */
